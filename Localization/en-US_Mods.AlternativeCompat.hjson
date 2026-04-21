@@ -1,0 +1,68 @@
+Depths: {
+	BPCrystalSkinPotion:
+		'''
+		Provides immunity to quicksilver, and grants increased damage reduction
+		Also has a small chance to reflect hostile projectiles
+		'''
+	BPBuffCrystalSkin:
+		'''
+		Immune to quicksilver, and increased endurance
+		You have a small chance to reflect projectiles
+		'''
+	Tiles.MagicStorage.ArqueriteStorageUnitTile.MapEntry: Arquerite Storage Unit
+
+	Items: {
+		MagicStorage: {
+			ArqueriteCore.DisplayName: Storage Core (Arquerite)
+
+			ArqueriteStorageUnitItem: {
+				DisplayName: Arquerite Storage Unit
+				Tooltip:
+					'''
+					A component for storing items in a Magic Storage storage system
+					Can store up to 120 items
+					'''
+			}
+
+			ArqueriteUpgrade: {
+				DisplayName: Arquerite Upgrade
+				Tooltip:
+					'''
+					Upgrades Storage Unit to 120 capacity
+					<right> a Demonite/Crimtane Storage Unit to use
+					'''
+				TooltipAvalon: <right> a Demonite/Crimtane/Bacculite Storage Unit to use
+			}
+		}
+	}
+}
+
+Confection: {
+	MagicStorage.UpgradeBlueChlorophyte: <right> a Hallowed/Neapolinite Storage Unit to use
+	Tiles.MagicStorage.NeapoliniteStorageUnitTile.MapEntry: Neapolinite Storage Unit
+
+	Items: {
+		MagicStorage: {
+			NeapoliniteCore.DisplayName: Storage Core (Neapolinite)
+
+			NeapoliniteStorageUnitItem: {
+				DisplayName: Neapolinite Storage Unit
+				Tooltip:
+					'''
+					A component for storing items in a Magic Storage storage system
+					Can store up to 160 items
+					'''
+			}
+
+			NeapoliniteUpgrade: {
+				DisplayName: Neapolinite Upgrade
+				Tooltip:
+					'''
+					Upgrades Storage Unit to 160 capacity
+					<right> a Hellstone Storage Unit to use
+					'''
+				TooltipDepths: <right> a Hellstone/Arquerite Storage Unit to use
+			}
+		}
+	}
+}

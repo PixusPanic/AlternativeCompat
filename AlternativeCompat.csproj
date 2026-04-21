@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<!-- Import tModLoader mod properties -->
+	<Import Project="..\tModLoader.targets" />
+
+	<!-- General -->
+	<PropertyGroup>
+		
+	</PropertyGroup>
+	<ItemGroup>
+	  <Reference Include="BetterPotions">
+	    <HintPath>..\ModAssemblies\BetterPotions_v1.3.1.dll</HintPath>
+	  </Reference>
+	  <Reference Include="MagicStorage">
+	    <HintPath>..\ModAssemblies\MagicStorage_v0.7.0.4.dll</HintPath>
+	  </Reference>
+	  <Reference Include="ModLiquidLib">
+	    <HintPath>..\ModAssemblies\ModLiquidLib_v2025.12.202601.dll</HintPath>
+	  </Reference>
+	  <Reference Include="OrchidMod">
+	    <HintPath>..\ModAssemblies\OrchidMod_v1.5.1.3.dll</HintPath>
+	  </Reference>
+	  <Reference Include="PrimeRework">
+	    <HintPath>..\ModAssemblies\PrimeRework_v5.0.13.dll</HintPath>
+	  </Reference>
+	  <Reference Include="SerousCommonLib">
+	    <HintPath>..\ModAssemblies\SerousCommonLib_v1.0.6.dll</HintPath>
+	  </Reference>
+	  <Reference Include="TheConfectionRebirth">
+	    <HintPath>..\ModAssemblies\TheConfectionRebirth_v0.30.0.1.dll</HintPath>
+	  </Reference>
+	  <Reference Include="TheDepths">
+	    <HintPath>..\ModAssemblies\TheDepths_v1.0.4.0.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Depths\Thorium\" />
+	</ItemGroup>
+
+	<!-- References -->
+
+</Project>

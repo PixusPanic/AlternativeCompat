@@ -1,0 +1,21 @@
+Unofficial Alternative Biomes Compatibility is a side-mod meant for both  [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2882567428]The Depths[/url] and  [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2601885797]The Confection[/url] (or just either) meant to help bridge compatibility between it and a few other mods.
+As such, it doesn't necessarily require either as a hard dependency, but it'll do nothing without either mod being enabled.
+
+[url=https://discord.gg/SvdBYeSju3]Join my tModLoader Discord server here![/url]
+
+-
+
+Some examples of current compatibility:
+- Both Arquerite (Depths) and Neapolinite (Confection) storage tiers have been added for [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2563309347]Magic Storage[/url] users (with permission from yahooyowza for their sprites)
+- Similarly, if MS is enabled, Chasme (Depths) will also drop a Shadow Diamond upon being downed for the first time
+- Modded gems will spawn in the Depths (currently works with Thorium, Exxo Avalon Origins, and Verdant)
+- If playing with [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2868085945]Better Potions[/url], the Crystal Skin Potion (Depths) will receive a slight buff if the Obsidian Skin Potion is also buffed
+- [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2737642173]Mech Bosses Rework[/url]'s new mechs will drop Hallowed Ore or Neapolinite Ore (Confection) depending on the world evil (or both in drunk worlds)
+
+Ideas and to-do:
+- If both Depths and Thorium are enabled, potentially replace the Scarlet block set into a more Depths-appropriate set (like Mercury) in Depths and drunk worlds
+- Similarly, replace the Soul of Plight, and the new Thorium underworld enemies, into something more fitting in respective worlds (Soul of Fluorite?)
+- Also includes the Underworld chest (and implement a new Depths weapon for it too)
+- Add in infected versions of other modded biomes
+- Look into compatibility for Remnants with how it generates biome chests
+- Fix up the MS upgrade text so "Right click a" displays by default instead of "<right>"
