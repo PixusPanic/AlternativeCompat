@@ -1,4 +1,5 @@
 ﻿using AlternativeCompat.Depths.MStorage;
+using AlternativeCompat.Utils;
 using Avalon.Items.Material.Bars;
 using MagicStorage.Components;
 using MagicStorage.CrossMod.Storage;
@@ -110,7 +111,7 @@ namespace AlternativeCompat.Contagion.MStorage
         {
             // By default, StorageUnit places a TEStorageUnit tile entity
             // Use this method to place a custom tile entity if needed
-            return base.GetTileEntity();
+            return ModContent.GetInstance<FixMSStorageUnits>();
         }
 
         protected override bool GetGlowmask(int x, int y, int type, int frameX, int frameY, out Asset<Texture2D> asset, out Color drawColor)
