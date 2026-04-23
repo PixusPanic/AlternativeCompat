@@ -1,30 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terraria.ModLoader;
+﻿using Terraria.ModLoader;
+using TheDepths.NPCs.Chasme;
 
 namespace AlternativeCompat.Depths.MStorage
 {
     [JITWhenModsEnabled("MagicStorage")]
     public class ChasmeShadowDiamond : ModSystem
     {
-        int chasme = -1;
+        [JITWhenModsEnabled(AlternativeCompat.depths)]
+        private static int Chasme => ModContent.NPCType<ChasmeHeart>();
 
-        public override bool IsLoadingEnabled(Mod mod)
-        {
-            if (!ModLoader.TryGetMod(AlternativeCompat.depths, out var depths) ||
-                !depths.TryFind("ChasmeHeart", out ModNPC chasmeBoss)) return false;
-            chasme = chasmeBoss.Type;
-
-            return true;
-        }
+        public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.depths);
 
         public override void OnModLoad()
         {
-            if (chasme > -1 && ModLoader.TryGetMod("MagicStorage", out var storage))
-                storage.Call("Set Shadow Diamond Drop Rule", chasme, storage.Call("Get Shadow Diamond Drop Rule", 1, -1));
+            if (Chasme > -1 && ModLoader.TryGetMod("MagicStorage", out var mStorage))
+                mStorage.Call("Set Shadow Diamond Drop Rule", Chasme, mStorage.Call("Get Shadow Diamond Drop Rule", 1, -1));
         }
     }
 }

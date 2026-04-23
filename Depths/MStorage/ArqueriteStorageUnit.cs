@@ -13,31 +13,6 @@ using TheDepths.Items.Placeable;
 
 namespace AlternativeCompat.Depths.MStorage
 {
-    public class LoadArqueriteTier : ModSystem
-    {
-        private static bool MSAndDepths() => ModLoader.HasMod(AlternativeCompat.depths) && ModLoader.HasMod("MagicStorage");
-
-        public static int upgrade = MSAndDepths() ? GetInstance(1) : -1;
-        public static int core = MSAndDepths() ? GetInstance(2) : -1;
-        public static int storageItem = MSAndDepths() ? GetInstance(3) : -1;
-        public static int storageTile = MSAndDepths() ? GetInstance(4) : -1;
-        [JITWhenModsEnabled(AlternativeCompat.depths)]
-        public static int arqueriteBar => ModContent.ItemType<ArqueriteBar>();
-
-        [JITWhenModsEnabled("MagicStorage")]
-        private static int GetInstance(int file)
-        {
-            return file switch
-            {
-                1 => ModContent.ItemType<ArqueriteUpgrade>(),
-                2 => ModContent.ItemType<ArqueriteCore>(),
-                3 => ModContent.ItemType<ArqueriteStorageUnitItem>(),
-                4 => ModContent.TileType<ArqueriteStorageUnitTile>(),
-                _ => -1,
-            };
-        }
-    }
-
     // This file showcases how to make a basic tier for Storage Units
     // To implement a custom Storage Unit tier, you need several components:
     //   1. The StorageUnitTier which defines the tier's properties and upgrade paths
@@ -53,17 +28,20 @@ namespace AlternativeCompat.Depths.MStorage
     {
         public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.depths);
 
+        [JITWhenModsEnabled(AlternativeCompat.depths)]
+        public override int UpgradeItemType => ModContent.ItemType<ArqueriteUpgrade>();
 
-        public override int UpgradeItemType => LoadArqueriteTier.upgrade;
-
-        public override int CoreItemType => LoadArqueriteTier.core;
+        [JITWhenModsEnabled(AlternativeCompat.depths)]
+        public override int CoreItemType => ModContent.ItemType<ArqueriteCore>();
 
         // You can find the capacity of the base Magic Storage tiers at:  MagicStorage/CrossMod/Default/StorageUnitTiers.cs
         public override int Capacity => 120;
 
-        public override int StorageUnitItemType => LoadArqueriteTier.storageItem;
+        [JITWhenModsEnabled(AlternativeCompat.depths)]
+        public override int StorageUnitItemType => ModContent.ItemType<ArqueriteStorageUnitItem>();
 
-        public override int StorageUnitTileType => LoadArqueriteTier.storageTile;
+        [JITWhenModsEnabled(AlternativeCompat.depths)]
+        public override int StorageUnitTileType => ModContent.TileType<ArqueriteStorageUnitTile>();
 
         public override void SetStaticDefaults()
         {
@@ -71,10 +49,10 @@ namespace AlternativeCompat.Depths.MStorage
             SetUpgradeableFrom(Demonite);
             SetUpgradeableFrom(Crimtane);
             SetUpgradeableTo(Hallowed);
-            if (ModLoader.HasMod("TheConfectionRebirth")) Neapolinite();
+            if (ModLoader.HasMod(AlternativeCompat.confection)) Neapolinite();
         }
 
-        [JITWhenModsEnabled("TheConfectionRebirth")]
+        [JITWhenModsEnabled(AlternativeCompat.confection)]
         private void Neapolinite() => SetUpgradeableTo(ModContent.GetInstance<NeapoliniteStorageUnitTier>());
 
         public override void Frame(StorageUnitFullness fullness, bool active, out int frameX, out int frameY)
@@ -153,10 +131,8 @@ namespace AlternativeCompat.Depths.MStorage
 
         public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.depths);
 
-        public override StorageUnitTier Tier => ModLoader.HasMod(AlternativeCompat.depths) ? GetTier : StorageUnitTier.Basic;
-
         [JITWhenModsEnabled(AlternativeCompat.depths)]
-        private static StorageUnitTier GetTier => ModContent.GetInstance<ArqueriteStorageUnitTier>();
+        public override StorageUnitTier Tier => ModContent.GetInstance<ArqueriteStorageUnitTier>();
 
         public override void SetDefaults()
         {
@@ -171,16 +147,15 @@ namespace AlternativeCompat.Depths.MStorage
         public override string LocalizationCategory => "Depths.Items.MagicStorage";
 
         public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.depths);
-
-        public override StorageUnitTier Tier => ModLoader.HasMod(AlternativeCompat.depths) ? GetTier : StorageUnitTier.Basic;
+        
+        [JITWhenModsEnabled(AlternativeCompat.depths)]
+        public override StorageUnitTier Tier => ModContent.GetInstance<ArqueriteStorageUnitTier>();
 
         [JITWhenModsEnabled(AlternativeCompat.depths)]
-        private static StorageUnitTier GetTier => ModContent.GetInstance<ArqueriteStorageUnitTier>();
-
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(LoadArqueriteTier.arqueriteBar, 10)
+                .AddIngredient(ModContent.ItemType<ArqueriteBar>(), 10)
                 .AddIngredient(ItemID.Topaz)
                 .AddTile(TileID.Anvils)
                 .Register();
@@ -194,10 +169,9 @@ namespace AlternativeCompat.Depths.MStorage
 
         public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.depths);
 
-        public override StorageUnitTier Tier => ModLoader.HasMod(AlternativeCompat.depths) ? GetTier : StorageUnitTier.Basic;
-
         [JITWhenModsEnabled(AlternativeCompat.depths)]
-        private static StorageUnitTier GetTier => ModContent.GetInstance<ArqueriteStorageUnitTier>();
+        public override StorageUnitTier Tier => ModContent.GetInstance<ArqueriteStorageUnitTier>();
+
 
         // The tooltip will default to the localization at:  Mods.MagicStorage.Items.StorageCore.CommonTooltip
         // If you want to customize the tooltip, you can override it here

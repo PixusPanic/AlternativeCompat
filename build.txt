@@ -1,8 +1,8 @@
 displayName = Unofficial Alternative Biomes Compatibility
 author = Pixus
-version = 1.0.6
-weakReferences = ModLiquidLib, TheDepths, TheConfectionRebirth, MagicStorage, BetterPotions, OrchidMod
-sortAfter = Avalon, ThoriumMod, Verdant, PrimeRework
+version = 1.1
+weakReferences = ModLiquidLib, TheDepths, TheConfectionRebirth, Avalon, MagicStorage, BetterPotions, OrchidMod
+sortAfter = ThoriumMod, Verdant, PrimeRework
 includeSource = true
 buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*, Todo\*
-homepage = https://discord.gg/SvdBYeSju3
+homepage = https://github.com/PixusPanic/AlternativeCompat

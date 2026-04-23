@@ -1,13 +1,41 @@
+Contagion: {
+	Tiles.MagicStorage.BacciliteStorageUnitTile.MapEntry: Baccilite Storage Unit
+
+	Items: {
+		MagicStorage: {
+			BacciliteCore.DisplayName: Storage Core (Baccilite)
+
+			BacciliteStorageUnitItem: {
+				DisplayName: Baccilite Storage Unit
+				Tooltip:
+					'''
+					A component for storing items in a Magic Storage storage system
+					Can store up to 80 items
+					'''
+			}
+
+			BacciliteUpgrade: {
+				DisplayName: Baccilite Upgrade
+				Tooltip:
+					'''
+					Upgrades Storage Unit to 80 capacity
+					<right> a Storage Unit to use
+					'''
+			}
+		}
+	}
+}
+
 Depths: {
 	BPCrystalSkinPotion:
 		'''
-		Provides immunity to quicksilver, and grants increased damage reduction
-		Also has a small chance to reflect hostile projectiles
+		Provides immunity to quicksilver, and grants increased endurance
+		Also gives a 10% chance to reflect hostile projectiles
 		'''
 	BPBuffCrystalSkin:
 		'''
-		Immune to quicksilver, and increased endurance
-		You have a small chance to reflect projectiles
+		Immune to quicksilver, and increased damage reduction
+		You have a 10% chance to reflect incoming projectiles
 		'''
 	Tiles.MagicStorage.ArqueriteStorageUnitTile.MapEntry: Arquerite Storage Unit
 
@@ -31,7 +59,8 @@ Depths: {
 					Upgrades Storage Unit to 120 capacity
 					<right> a Demonite/Crimtane Storage Unit to use
 					'''
-				TooltipAvalon: <right> a Demonite/Crimtane/Bacculite Storage Unit to use
+				TooltipAvalon: <right> a Demonite/Crimtane/Baccilite Storage Unit to use
+				TooltipGeneral: <right> any Evil Storage Unit to use
 			}
 		}
 	}

@@ -8,6 +8,9 @@
 		
 	</PropertyGroup>
 	<ItemGroup>
+	  <Reference Include="Avalon">
+	    <HintPath>..\ModAssemblies\Avalon_v1.3.5.dll</HintPath>
+	  </Reference>
 	  <Reference Include="BetterPotions">
 	    <HintPath>..\ModAssemblies\BetterPotions_v1.3.1.dll</HintPath>
 	  </Reference>

@@ -1,17 +1,17 @@
-﻿using MagicStorage.Components;
+﻿using AlternativeCompat.Depths.MStorage;
+using Avalon.Items.Material.Bars;
+using MagicStorage.Components;
 using MagicStorage.CrossMod.Storage;
 using MagicStorage.Items;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using TheConfectionRebirth.Items.Placeable;
 
-namespace AlternativeCompat.Confection.MStorage
+namespace AlternativeCompat.Contagion.MStorage
 {
     // This file showcases how to make a basic tier for Storage Units
     // To implement a custom Storage Unit tier, you need several components:
@@ -24,36 +24,38 @@ namespace AlternativeCompat.Confection.MStorage
     // In this example, the Demonite and Crimtane tiers can be upgraded to the Example tier, which can then be upgraded to the Hellstone tier
 
     [ExtendsFromMod("MagicStorage")]
-    internal class NeapoliniteStorageUnitTier : StorageUnitTier
+    internal class BacciliteStorageUnitTier : StorageUnitTier
     {
-        public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.confection);
+        public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.avalon);
 
-        [JITWhenModsEnabled(AlternativeCompat.confection)]
-        public override int UpgradeItemType => ModContent.ItemType<NeapoliniteUpgrade>();
+        [JITWhenModsEnabled(AlternativeCompat.avalon)]
+        public override int UpgradeItemType => ModContent.ItemType<BacciliteUpgrade>();
 
-        [JITWhenModsEnabled(AlternativeCompat.confection)]
-        public override int CoreItemType => ModContent.ItemType<NeapoliniteCore>();
+        [JITWhenModsEnabled(AlternativeCompat.avalon)]
+        public override int CoreItemType => ModContent.ItemType<BacciliteCore>();
 
         // You can find the capacity of the base Magic Storage tiers at:  MagicStorage/CrossMod/Default/StorageUnitTiers.cs
-        public override int Capacity => 160;
+        public override int Capacity => 80;
 
-        [JITWhenModsEnabled(AlternativeCompat.confection)]
-        public override int StorageUnitItemType => ModContent.ItemType<NeapoliniteStorageUnitItem>();
+        [JITWhenModsEnabled(AlternativeCompat.avalon)]
+        public override int StorageUnitItemType => ModContent.ItemType<BacciliteStorageUnitItem>();
 
-        [JITWhenModsEnabled(AlternativeCompat.confection)]
-        public override int StorageUnitTileType => ModContent.TileType<NeapoliniteStorageUnitTile>();
+        [JITWhenModsEnabled(AlternativeCompat.avalon)]
+        public override int StorageUnitTileType => ModContent.TileType<BacciliteStorageUnitTile>();
 
         public override void SetStaticDefaults()
         {
             // Set the upgrade paths for this tier in SetStaticDefaults
-            SetUpgradeableFrom(Hellstone);
-            // SetUpgradableFrom(Arquerite) is set in ArqueriteStorageUnit
-            SetUpgradeableTo(BlueChlorophyte);
+            SetUpgradeableFrom(Basic);
+            if (ModLoader.HasMod(AlternativeCompat.depths)) Arquerite();
         }
+
+        [JITWhenModsEnabled(AlternativeCompat.depths)]
+        private void Arquerite() => SetUpgradeableTo(ModContent.GetInstance<ArqueriteStorageUnitTier>());
 
         public override void Frame(StorageUnitFullness fullness, bool active, out int frameX, out int frameY)
         {
-            // Based on the NeapoliniteStorageUnitTile.png spritesheet:
+            // Based on the ArqueriteStorageUnitTile.png spritesheet:
             //   Style columns are 36 pixels wide total
             //   Active styles are in the first three columns
             //   Each fullness type takes up one style column
@@ -68,7 +70,7 @@ namespace AlternativeCompat.Confection.MStorage
 
         public override void GetState(int frameX, int frameY, out StorageUnitFullness fullness, out bool active)
         {
-            // Based on the NeapoliniteStorageUnitTile.png spritesheet:
+            // Based on the ArqueriteStorageUnitTile.png spritesheet:
             //   Style columns are 36 pixels wide total
             //   Active styles are in the first three columns
             //   Each fullness type takes up one style column
@@ -88,11 +90,11 @@ namespace AlternativeCompat.Confection.MStorage
     }
 
     [ExtendsFromMod("MagicStorage")]
-    internal class NeapoliniteStorageUnitTile : MagicStorage.Components.StorageUnit
+    internal class BacciliteStorageUnitTile : MagicStorage.Components.StorageUnit
     {
-        public override string LocalizationCategory => "Confection.Tiles.MagicStorage";
+        public override string LocalizationCategory => "Contagion.Tiles.MagicStorage";
 
-        public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.confection);
+        public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.avalon);
 
         public override void ModifyObjectData()
         {
@@ -121,65 +123,52 @@ namespace AlternativeCompat.Confection.MStorage
     }
 
     [ExtendsFromMod("MagicStorage")]
-    internal class NeapoliniteStorageUnitItem : BaseStorageUnitItem
+    internal class BacciliteStorageUnitItem : BaseStorageUnitItem
     {
-        public override string LocalizationCategory => "Confection.Items.MagicStorage";
+        public override string LocalizationCategory => "Contagion.Items.MagicStorage";
 
-        public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.confection);
+        public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.avalon);
 
-        [JITWhenModsEnabled(AlternativeCompat.confection)]
-        public override StorageUnitTier Tier => ModContent.GetInstance<NeapoliniteStorageUnitTier>();
+        [JITWhenModsEnabled(AlternativeCompat.avalon)]
+        public override StorageUnitTier Tier => ModContent.GetInstance<BacciliteStorageUnitTier>();
 
         public override void SetDefaults()
         {
             base.SetDefaults();
-            Item.rare = ItemRarityID.Pink;  // This rarity will be automatically applied to the ExampleUpgrade and ExampleCore items as well
+            Item.rare = ItemRarityID.Blue;  // This rarity will be automatically applied to the ExampleUpgrade and ExampleCore items as well
         }
     }
 
     [ExtendsFromMod("MagicStorage")]
-    internal class NeapoliniteUpgrade : BaseStorageUpgradeItem
+    internal class BacciliteUpgrade : BaseStorageUpgradeItem
     {
-        public override string LocalizationCategory => "Confection.Items.MagicStorage";
+        public override string LocalizationCategory => "Contagion.Items.MagicStorage";
 
-        public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.confection);
+        public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.avalon);
 
-        [JITWhenModsEnabled(AlternativeCompat.confection)]
-        public override StorageUnitTier Tier => ModContent.GetInstance<NeapoliniteStorageUnitTier>();
+        [JITWhenModsEnabled(AlternativeCompat.avalon)]
+        public override StorageUnitTier Tier => ModContent.GetInstance<BacciliteStorageUnitTier>();
 
-        public override void ModifyTooltips(List<TooltipLine> tooltips)
-        {
-            if (!ModLoader.HasMod(AlternativeCompat.depths)) return;
-
-            TooltipLine line = tooltips.Find(x => x.Name == "Tooltip0" && x.Mod == "Terraria");
-            if (line == null) return;
-
-            line.Text = Language.GetTextValue(this.GetLocalization("TooltipDepths").Value);
-        }
-
-        [JITWhenModsEnabled(AlternativeCompat.confection)]
+        [JITWhenModsEnabled(AlternativeCompat.avalon)]
         public override void AddRecipes()
         {
             CreateRecipe()
-                .AddIngredient(ModContent.ItemType<NeapoliniteBar>(), 10)
-                .AddIngredient(ItemID.SoulofFright)
-                .AddIngredient(ItemID.SoulofMight)
-                .AddIngredient(ItemID.SoulofSight)
-                .AddIngredient(ItemID.Sapphire)
-                .AddTile(TileID.MythrilAnvil)
+                .AddIngredient(ModContent.ItemType<BacciliteBar>(), 10)
+                .AddIngredient(ItemID.Amethyst)
+                .AddTile(TileID.Anvils)
                 .Register();
         }
     }
 
     [ExtendsFromMod("MagicStorage")]
-    internal class NeapoliniteCore : BaseStorageCore
+    internal class BacciliteCore : BaseStorageCore
     {
-        public override string LocalizationCategory => "Confection.Items.MagicStorage";
+        public override string LocalizationCategory => "Contagion.Items.MagicStorage";
 
-        public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.confection);
+        public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.avalon);
 
-        [JITWhenModsEnabled(AlternativeCompat.confection)]
-        public override StorageUnitTier Tier => ModContent.GetInstance<NeapoliniteStorageUnitTier>();
+        [JITWhenModsEnabled(AlternativeCompat.avalon)]
+        public override StorageUnitTier Tier => ModContent.GetInstance<BacciliteStorageUnitTier>();
 
         // The tooltip will default to the localization at:  Mods.MagicStorage.Items.StorageCore.CommonTooltip
         // If you want to customize the tooltip, you can override it here
