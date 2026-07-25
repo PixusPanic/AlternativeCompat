@@ -1,5 +1,5 @@
 ﻿using AlternativeCompat.Depths.MStorage;
-using AlternativeCompat.Utils;
+using AlternativeCompat.Utils.MagicStorage;
 using Avalon.Items.Material.Bars;
 using MagicStorage.Components;
 using MagicStorage.CrossMod.Storage;

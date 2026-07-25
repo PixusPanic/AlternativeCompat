@@ -5,7 +5,7 @@ using MagicStorage.Components;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace AlternativeCompat.Utils
+namespace AlternativeCompat.Utils.MagicStorage
 {
     // Okay, so I looked at TEStorageUnit again, and there’s a massive oversight that I, well, overlooked
     // It still checks if the ID of the tile is StorageUnit, so it thinks that custom Storage Units are invalid
@@ -18,9 +18,9 @@ namespace AlternativeCompat.Utils
     public class FixMSStorageUnits : TEStorageUnit
     {
         public override bool ValidTile(in Tile tile) => tile.TileFrameX % 36 == 0 && tile.TileFrameY % 36 == 0 &&
-            ((ModLoader.HasMod(AlternativeCompat.avalon) && Baccilite(tile)) ||
-            (ModLoader.HasMod(AlternativeCompat.depths) && Arquerite(tile)) ||
-            (ModLoader.HasMod(AlternativeCompat.confection) && Neapolinite(tile)));
+            (ModLoader.HasMod(AlternativeCompat.avalon) && Baccilite(tile) ||
+            ModLoader.HasMod(AlternativeCompat.depths) && Arquerite(tile) ||
+            ModLoader.HasMod(AlternativeCompat.confection) && Neapolinite(tile));
 
         [JITWhenModsEnabled(AlternativeCompat.avalon)]
         private static bool Baccilite(Tile tile) => TileLoader.GetTile(tile.TileType) is BacciliteStorageUnitTile;

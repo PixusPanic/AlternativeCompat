@@ -4,7 +4,6 @@ using ModLiquidLib.Utils.LiquidContent;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using MonoMod.RuntimeDetour;
-using System;
 using System.Reflection;
 using Terraria;
 using Terraria.ModLoader;
@@ -56,41 +55,22 @@ namespace AlternativeCompat.Depths.MStorage
         #endregion
 
         #region IL edit the crafting interface
-        private Mod MS = null;
-        private static Assembly MSAssembly = null;
-
-        /*internal static Type BiomeGlobeDetour;
-        internal static MethodInfo BiomeGlobeRecipes;
-        internal static ILHook AddQuicksilverToBiomeGlobe;*/
-
-        private static Type MSUtility;
-        private static MethodInfo AddCraftingZones;
         private static ILHook AddQuicksilverToMSCrafting;
 
         public override void OnModLoad()
         {
-            MS = ModLoader.GetMod("MagicStorage");
+            var MS = ModLoader.GetMod("MagicStorage");
             if (MS == null) return;
 
-            MSAssembly = MS.GetType().Assembly;
+            var MSAssembly = MS.GetType().Assembly;
             if (MSAssembly == null) return;
 
-            /*BiomeGlobeDetour = MSAssembly.GetType("MagicStorage.Edits.BiomeGlobeDetour");
-            if (BiomeGlobeDetour != null)
-            {
-                BiomeGlobeRecipes = BiomeGlobeDetour.GetMethod("Recipe_FindRecipes", BindingFlags.NonPublic | BindingFlags.Static);
-                if (BiomeGlobeRecipes == null) return;
-
-                AddQuicksilverToBiomeGlobe = new ILHook(BiomeGlobeRecipes, PatchQuicksilverToBiomeGlobe);
-                AddQuicksilverToBiomeGlobe.Apply();
-            }*/
-
-            MSUtility = MSAssembly.GetType("MagicStorage.Utility");
+            var MSUtility = MSAssembly.GetType("MagicStorage.Utility");
             if (MSUtility != null)
             {
-                AddCraftingZones = MSUtility.GetMethod("SetVanillaAdjTiles", BindingFlags.Public | BindingFlags.Static);
+                var AddCraftingZones = MSUtility.GetMethod("SetVanillaAdjTiles", BindingFlags.Public | BindingFlags.Static);
                 if (AddCraftingZones == null) return;
-
+                
                 AddQuicksilverToMSCrafting = new ILHook(AddCraftingZones, PatchQuicksilverToMSCrafting);
                 AddQuicksilverToMSCrafting.Apply();
             }
@@ -98,7 +78,6 @@ namespace AlternativeCompat.Depths.MStorage
 
         public override void OnModUnload()
         {
-            //AddQuicksilverToBiomeGlobe?.Dispose();
             AddQuicksilverToMSCrafting?.Dispose();
         }
 
@@ -107,19 +86,17 @@ namespace AlternativeCompat.Depths.MStorage
         private void PatchQuicksilverToMSCrafting(ILContext il)
         {
             var c = new ILCursor(il);
+
+            // Go to the end of it, then inject this code
             c.Index = c.Instrs.Count - 1;
 
             c.Emit(OpCodes.Ldarg_0); // Item
             c.Emit(OpCodes.Ldloc_0); // Player
-            c.EmitDelegate<Action<Item, Player>>((item, player) => {
-                //var oldQuicksilver = player.GetModPlayer<ModLiquidPlayer>().AdjLiquid[QuicksilverCondition.Quicksilver];
-
+            c.EmitDelegate((Item item, Player player) => {
                 if (item.type == ModContent.ItemType<QuicksilverBucket>() ||
                     item.type == ModContent.ItemType<BottomlessQuicksilverBucket>() ||
                     item.type == ModContent.ItemType<BiomeGlobe>())
                     player.GetModPlayer<ModLiquidPlayer>().AdjLiquid[QuicksilverCondition.Quicksilver] = true;
-
-                //player.GetModPlayer<ModLiquidPlayer>().AdjLiquid[QuicksilverCondition.Quicksilver] = oldQuicksilver;
             });
         }
         #endregion

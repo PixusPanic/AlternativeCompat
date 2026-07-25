@@ -1,4 +1,4 @@
-﻿using AlternativeCompat.Utils;
+﻿using AlternativeCompat.Utils.MagicStorage;
 using MagicStorage.Components;
 using MagicStorage.CrossMod.Storage;
 using MagicStorage.Items;

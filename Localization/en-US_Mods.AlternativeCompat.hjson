@@ -95,3 +95,20 @@ Confection: {
 		}
 	}
 }
+
+MagicStorage.Warning:
+	'''
+	[c/FF0000:Cross-mod storage units can be buggy and "delete" themselves!]
+	You may want to backup your world and/or player before using this!
+	'''
+
+Configs: {
+	AltCompatClient: {
+		DisplayName: Alternate Biome Compatability - Client
+
+		MStorageWarning: {
+			Label: Magic Storage Warning
+			Tooltip: Shows up a warning in the item text for any cross-mod storage unit or core.
+		}
+	}
+}

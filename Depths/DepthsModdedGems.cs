@@ -68,7 +68,6 @@ namespace AlternativeCompat.Depths
                 if (!ModLoader.HasMod("TheDepths")) return false;
 
                 if (ModLoader.TryGetMod("TheDepths", out var depths)) {
-                    TheDepths = depths;
 
                     if (depths.TryFind("ShaleBlock", out ModTile shale))
                         _mergingShaleTiles.Add(shale.Type);
@@ -102,25 +101,42 @@ namespace AlternativeCompat.Depths
 
 				return true;
 			}
-            private static Mod TheDepths;
-            private static Assembly depthsAssembly;
-            private static Type depthsGen;
-
-            // JIT issues`
+            // JIT issues
             private static bool LoadGemsMethod()
 			{
-                if (TheDepths == null) return false;
-                depthsAssembly = TheDepths.GetType().Assembly;
+                Assembly depthsAssembly;
+                Type depthsGen;
 
-                // Because DepthGems is internal, reflection needs to be used
-                foreach (Type type in depthsAssembly.GetTypes())
+                if (!ModLoader.TryGetMod(AlternativeCompat.depths, out Mod depths)) return false;
+                else depthsAssembly = depths.Code;
+                if (depthsAssembly == null)
                 {
-                    if (type.Name == "DepthsGen") depthsGen = type;
+                    ModContent.GetInstance<AlternativeCompat>().Logger.Error("Could not find the Depths assembly!");
+                    return false;
                 }
 
-                _gemsList = depthsGen.GetMethods
+                bool successful = false;
+                try
+                {
+                    // Because DepthGems is internal, reflection needs to be used
+                    depthsGen = depthsAssembly.GetType("TheDepths.Worldgen.Generation.DepthsGen");
+                    if (depthsGen == null)
+                    {
+                        ModContent.GetInstance<AlternativeCompat>().Logger.Error("Could not find DepthsGen in The Depths assembly!");
+                        return false;
+                    }
+
+                    _gemsList = depthsGen.GetMethods
                     (BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static)
-					.FirstOrDefault(m => m.Name.Contains("Gems"));
+                    .FirstOrDefault(m => m.Name.Contains("Gems"));
+
+                    successful = true;
+                }
+                catch
+                {
+                    ModContent.GetInstance<AlternativeCompat>().Logger.Error("Getting gemsList Method failed!");
+                } 
+                if (!successful) return false;
 
                 return _gemsList != null;
 			}

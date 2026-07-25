@@ -6,9 +6,10 @@ using TheDepths.Liquids;
 
 namespace AlternativeCompat.Utils
 {
+    [JITWhenModsEnabled("ModLiquidLib")]
     public class QuicksilverCondition : ModSystem
     {
-        public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod("ModLiquidLib") && ModLoader.HasMod(AlternativeCompat.depths);
+        public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.depths);
 
         [JITWhenModsEnabled(AlternativeCompat.depths)]
         public static int Quicksilver => LiquidLoader.LiquidType<Quicksilver>();

@@ -10,7 +10,7 @@ using static TheConfectionRebirth.NPCs.ConfectionGlobalNPC;
 
 namespace AlternativeCompat.Confection
 {
-    [JITWhenModsEnabled("PrimeRework")]
+    //[JITWhenModsEnabled("PrimeRework")]
     public class ConfectionMRGlobalItem : GlobalItem
     {
         public override bool IsLoadingEnabled(Mod mod) =>
@@ -60,16 +60,16 @@ namespace AlternativeCompat.Confection
             DrunkWorldIsNotActive NotDrunk = new();
 
             LeadingConditionRule ConfectionCondition = new(new ConfectionDropRule());
-            ConfectionCondition.OnSuccess(ItemDropRule.ByCondition(NotDrunk, neapoliniteOre, 1, 15 * 5, 30 * 5));
+            ConfectionCondition.OnSuccess(ItemDropRule.ByCondition(NotDrunk, neapoliniteOre, 1, 20 * 5, 35 * 5));
             itemLoot.Add(ConfectionCondition);
 
             LeadingConditionRule HallowCondition = new(new HallowDropRule());
-            HallowCondition.OnSuccess(ItemDropRule.ByCondition(NotDrunk, hallowedOre, 1, 15 * 5, 30 * 5));
+            HallowCondition.OnSuccess(ItemDropRule.ByCondition(NotDrunk, hallowedOre, 1, 20 * 5, 35 * 5));
             itemLoot.Add(HallowCondition);
 
             LeadingConditionRule DrunkCondition = new(new DrunkWorldIsActive());
-            DrunkCondition.OnSuccess(ItemDropRule.Common(hallowedOre, 1, 8 * 5, 15 * 5));
-            DrunkCondition.OnSuccess(ItemDropRule.Common(neapoliniteOre, 1, 8 * 5, 15 * 5));
+            DrunkCondition.OnSuccess(ItemDropRule.Common(hallowedOre, 1, 10 * 5, 18 * 5));
+            DrunkCondition.OnSuccess(ItemDropRule.Common(neapoliniteOre, 1, 10 * 5, 18 * 5));
             itemLoot.Add(DrunkCondition);
         }
 
@@ -87,7 +87,7 @@ namespace AlternativeCompat.Confection
         }
     }
 
-    [JITWhenModsEnabled("PrimeRework")]
+    //[JITWhenModsEnabled("PrimeRework")]
     public class ConfectionMRGlobalNPC : GlobalNPC
     {
         public override bool IsLoadingEnabled(Mod mod) =>
