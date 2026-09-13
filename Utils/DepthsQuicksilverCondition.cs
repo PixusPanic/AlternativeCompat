@@ -6,7 +6,7 @@ using TheDepths.Liquids;
 
 namespace AlternativeCompat.Utils
 {
-    [JITWhenModsEnabled("ModLiquidLib")]
+    [JITWhenModsEnabled(AlternativeCompat.liquidLib)]
     public class QuicksilverCondition : ModSystem
     {
         public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.depths);

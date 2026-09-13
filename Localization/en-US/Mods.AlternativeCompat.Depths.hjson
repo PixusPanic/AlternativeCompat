@@ -1,0 +1,37 @@
+BPCrystalSkinPotion:
+	'''
+	Provides immunity to quicksilver, and grants increased endurance
+	Also gives a 10% chance to reflect incoming projectiles
+	'''
+BPBuffCrystalSkin:
+	'''
+	Immune to quicksilver, and increased damage reduction
+	You have a 10% chance to reflect incoming projectiles
+	'''
+Tiles.MagicStorage.ArqueriteStorageUnitTile.MapEntry: Arquerite Storage Unit
+
+Items: {
+	MagicStorage: {
+		ArqueriteCore.DisplayName: Storage Core (Arquerite)
+
+		ArqueriteStorageUnitItem: {
+			DisplayName: Arquerite Storage Unit
+			Tooltip:
+				'''
+				A component for storing items in a Magic Storage storage system
+				Can store up to 120 items
+				'''
+		}
+
+		ArqueriteUpgrade: {
+			DisplayName: Arquerite Upgrade
+			Tooltip:
+				'''
+				Upgrades Storage Unit to 120 capacity
+				{MouseRight} a Demonite/Crimtane Storage Unit to use
+				'''
+			TooltipAvalon: "{MouseRight} a Demonite/Crimtane/Baccilite Storage Unit to use"
+			TooltipGeneral: "{MouseRight} any Evil Storage Unit to use"
+		}
+	}
+}

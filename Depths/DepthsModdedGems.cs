@@ -20,7 +20,6 @@ namespace AlternativeCompat.Depths
     [JITWhenModsEnabled(AlternativeCompat.depths)]
     public class DepthsModdedGems
     {
-        [JITWhenModsEnabled(AlternativeCompat.depths)]
         public class DepthsGemSystem : ModSystem
 		{
             /// <summary>
@@ -65,9 +64,9 @@ namespace AlternativeCompat.Depths
 
 			public override bool IsLoadingEnabled(Mod mod)
 			{
-                if (!ModLoader.HasMod("TheDepths")) return false;
+                if (!ModLoader.HasMod(AlternativeCompat.depths)) return false;
 
-                if (ModLoader.TryGetMod("TheDepths", out var depths)) {
+                if (ModLoader.TryGetMod(AlternativeCompat.depths, out var depths)) {
 
                     if (depths.TryFind("ShaleBlock", out ModTile shale))
                         _mergingShaleTiles.Add(shale.Type);
@@ -324,7 +323,7 @@ namespace AlternativeCompat.Depths
 
             public override void OnModLoad()
             {
-				if (ModLoader.TryGetMod("Avalon", out var avalon)) {
+				if (ModLoader.TryGetMod(AlternativeCompat.avalon, out var avalon)) {
 					if (avalon.TryFind("Peridot", out ModItem peridotItem) && avalon.TryFind("Peridot", out ModTile peridotTile))
                         AddShaleGem(peridotItem.Type, peridotTile.Type, TileID.Stone, 0.4f);
                     if (avalon.TryFind("Tourmaline", out ModItem tourmalineItem) && avalon.TryFind("Tourmaline", out ModTile tourmalineTile))

@@ -24,7 +24,7 @@ namespace AlternativeCompat.Confection.MStorage
     // Most of this is handled automatically for you, and you just have to define the relations between the components and their tier
     // In this example, the Demonite and Crimtane tiers can be upgraded to the Example tier, which can then be upgraded to the Hellstone tier
 
-    [ExtendsFromMod("MagicStorage")]
+    [ExtendsFromMod(AlternativeCompat.mStorage)]
     internal class NeapoliniteStorageUnitTier : StorageUnitTier
     {
         public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.confection);
@@ -88,7 +88,7 @@ namespace AlternativeCompat.Confection.MStorage
         }
     }
 
-    [ExtendsFromMod("MagicStorage")]
+    [ExtendsFromMod(AlternativeCompat.mStorage)]
     internal class NeapoliniteStorageUnitTile : MagicStorage.Components.StorageUnit
     {
         public override string LocalizationCategory => "Confection.Tiles.MagicStorage";
@@ -121,7 +121,7 @@ namespace AlternativeCompat.Confection.MStorage
         }
     }
 
-    [ExtendsFromMod("MagicStorage")]
+    [ExtendsFromMod(AlternativeCompat.mStorage)]
     internal class NeapoliniteStorageUnitItem : BaseStorageUnitItem
     {
         public override string LocalizationCategory => "Confection.Items.MagicStorage";
@@ -138,7 +138,7 @@ namespace AlternativeCompat.Confection.MStorage
         }
     }
 
-    [ExtendsFromMod("MagicStorage")]
+    [ExtendsFromMod(AlternativeCompat.mStorage)]
     internal class NeapoliniteUpgrade : BaseStorageUpgradeItem
     {
         public override string LocalizationCategory => "Confection.Items.MagicStorage";
@@ -172,7 +172,7 @@ namespace AlternativeCompat.Confection.MStorage
         }
     }
 
-    [ExtendsFromMod("MagicStorage")]
+    [ExtendsFromMod(AlternativeCompat.mStorage)]
     internal class NeapoliniteCore : BaseStorageCore
     {
         public override string LocalizationCategory => "Confection.Items.MagicStorage";

@@ -1,0 +1,27 @@
+MagicStorage.UpgradeBlueChlorophyte: "{MouseRight} a Hallowed/Neapolinite Storage Unit to use"
+Tiles.MagicStorage.NeapoliniteStorageUnitTile.MapEntry: Neapolinite Storage Unit
+
+Items: {
+	MagicStorage: {
+		NeapoliniteCore.DisplayName: Storage Core (Neapolinite)
+
+		NeapoliniteStorageUnitItem: {
+			DisplayName: Neapolinite Storage Unit
+			Tooltip:
+				'''
+				A component for storing items in a Magic Storage storage system
+				Can store up to 160 items
+				'''
+		}
+
+		NeapoliniteUpgrade: {
+			DisplayName: Neapolinite Upgrade
+			Tooltip:
+				'''
+				Upgrades Storage Unit to 160 capacity
+				{MouseRight} a Hellstone Storage Unit to use
+				'''
+			TooltipDepths: "{MouseRight} a Hellstone/Arquerite Storage Unit to use"
+		}
+	}
+}

@@ -11,7 +11,7 @@ namespace AlternativeCompat.Utils.MagicStorage
 {
     public class MSWarning : GlobalItem
     {
-        public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod("MagicStorage");
+        public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.mStorage);
 
         #region Tile IDs and matching them
         #region Avalon
@@ -24,7 +24,7 @@ namespace AlternativeCompat.Utils.MagicStorage
         private static bool Baccilite(Item entity) => entity.type == BacciliteCore || entity.type == BacciliteStorage;
         #endregion
 
-        #region Avalon
+        #region Depths
         [JITWhenModsEnabled(AlternativeCompat.depths)]
         private static int ArqueriteCore => ModContent.ItemType<ArqueriteCore>();
         [JITWhenModsEnabled(AlternativeCompat.depths)]
@@ -34,7 +34,7 @@ namespace AlternativeCompat.Utils.MagicStorage
         private static bool Arquerite(Item entity) => entity.type == ArqueriteCore || entity.type == ArqueriteStorage;
         #endregion
 
-        #region Avalon
+        #region Confection
         [JITWhenModsEnabled(AlternativeCompat.confection)]
         private static int NeapoliniteCore => ModContent.ItemType<NeapoliniteCore>();
         [JITWhenModsEnabled(AlternativeCompat.confection)]

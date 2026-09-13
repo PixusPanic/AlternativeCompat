@@ -1,0 +1,25 @@
+Configs: {
+	AltCompatClient: {
+		DisplayName: Alternate Biome Compat - Client
+
+		MStorageWarning: {
+			Label: Magic Storage Warning
+			Tooltip: Shows up a warning in the item text for any cross-mod storage unit or core.
+		}
+	}
+
+	AltCompatConfig: {
+		DisplayName: Alternate Biome Compat - Server
+
+		RequireAltMaterials: {
+			Label: Require Alternative Materials
+			Tooltip: ""
+		}
+	}
+}
+
+MagicStorage.Warning:
+	'''
+	[c/FF0000:Cross-mod storage units may be buggy and delete their contents!]
+	You may want to backup your world and/or player before using this!
+	'''

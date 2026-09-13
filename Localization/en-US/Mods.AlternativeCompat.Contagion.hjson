@@ -1,0 +1,25 @@
+Tiles.MagicStorage.BacciliteStorageUnitTile.MapEntry: Baccilite Storage Unit
+
+Items: {
+	MagicStorage: {
+		BacciliteCore.DisplayName: Storage Core (Baccilite)
+
+		BacciliteStorageUnitItem: {
+			DisplayName: Baccilite Storage Unit
+			Tooltip:
+				'''
+				A component for storing items in a Magic Storage storage system
+				Can store up to 80 items
+				'''
+		}
+
+		BacciliteUpgrade: {
+			DisplayName: Baccilite Upgrade
+			Tooltip:
+				'''
+				Upgrades Storage Unit to 80 capacity
+				{MouseRight} a Storage Unit to use
+				'''
+		}
+	}
+}

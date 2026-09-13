@@ -34,7 +34,7 @@ namespace AlternativeCompat.Confection
 
         private static int FindBossBag(string bossBag)
         {
-            if (ModLoader.TryGetMod("PrimeRework", out var mechRework) && mechRework.TryFind(bossBag, out ModItem bossType))
+            if (ModContent.TryFind("PrimeRework", bossBag, out ModItem bossType))
                 return bossType.Type;
             return -1;
         }
@@ -47,10 +47,12 @@ namespace AlternativeCompat.Confection
         public override void ModifyItemLoot(Item item, ItemLoot itemLoot)
         {
             if (ModLoader.HasMod(AlternativeCompat.confection) &&
-                (item.type == terminator && terminator > -1 || item.type == caretaker && caretaker > -1 ||
-                item.type == mechclops && mechclops > -1 || item.type == siegeEngine && siegeEngine > -1))
+                (IsEqualTo(item, terminator) || IsEqualTo(item, caretaker) ||
+                IsEqualTo(item, mechclops) || IsEqualTo(item, siegeEngine)))
                 OreLoot(itemLoot);
         }
+
+        private static bool IsEqualTo(Item item, int boss) => item.type == boss && boss > -1;
 
         [JITWhenModsEnabled(AlternativeCompat.confection)]
         private void OreLoot(ItemLoot itemLoot)
@@ -75,13 +77,13 @@ namespace AlternativeCompat.Confection
 
 
         [JITWhenModsEnabled(AlternativeCompat.confection)]
-        private static IItemDropRule FindHallowedBars(ItemLoot loot)
+        private static CommonDrop FindHallowedBars(ItemLoot loot)
         {
             foreach (IItemDropRule item in loot.Get(false))
             {
                 CommonDrop c = (CommonDrop)(object)(item is CommonDrop ? item : null);
                 if (c != null && c.itemId == ItemID.HallowedBar)
-                    return (IItemDropRule)(object)c;
+                    return (object)c as CommonDrop;
             }
             return null;
         }
@@ -111,7 +113,7 @@ namespace AlternativeCompat.Confection
 
         private static int FindBoss(string bossName)
         {
-            if (ModLoader.TryGetMod("PrimeRework", out var mechRework) && mechRework.TryFind(bossName, out ModNPC bossType))
+            if (ModContent.TryFind("PrimeRework", bossName, out ModNPC bossType))
                 return bossType.Type;
             return -1;
         }
@@ -124,11 +126,13 @@ namespace AlternativeCompat.Confection
 
         public override void ModifyNPCLoot(NPC npc, NPCLoot npcLoot)
         {
-            if (ModLoader.HasMod(AlternativeCompat.confection) && (npc.type == terminator && terminator > -1 ||
-                npc.type == caretaker && caretaker > -1 || npc.type == mechclops && mechclops > -1 ||
-                npc.type == siegeEngine && siegeEngine > -1 || npc.type == mechdusa && mechdusa > -1))
+            if (ModLoader.HasMod(AlternativeCompat.confection) && (IsEqualTo(npc, terminator) ||
+                IsEqualTo(npc, caretaker) || IsEqualTo(npc, mechclops) ||
+                IsEqualTo(npc, siegeEngine) || IsEqualTo(npc, mechdusa)))
                 OreLoot(npcLoot);
         }
+
+        private static bool IsEqualTo(NPC npc, int boss) => npc.type == boss && boss > -1;
 
         [JITWhenModsEnabled(AlternativeCompat.confection)]
         private void OreLoot(NPCLoot npcLoot)

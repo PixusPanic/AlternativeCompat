@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 
 namespace AlternativeCompat.Depths.MStorage
 {
-    [JITWhenModsEnabled("MagicStorage")]
+    [JITWhenModsEnabled(AlternativeCompat.mStorage)]
     public class BacteriumPrimeShadowDiamond : ModSystem
     {
         [JITWhenModsEnabled(AlternativeCompat.avalon)]
@@ -13,7 +13,7 @@ namespace AlternativeCompat.Depths.MStorage
 
         public override void OnModLoad()
         {
-            if (BacteriumPrime > -1 && ModLoader.TryGetMod("MagicStorage", out var mStorage))
+            if (BacteriumPrime > -1 && ModLoader.TryGetMod(AlternativeCompat.mStorage, out var mStorage))
                 mStorage.Call("Set Shadow Diamond Drop Rule", BacteriumPrime, mStorage.Call("Get Shadow Diamond Drop Rule", 1, -1));
         }
     }

@@ -3,7 +3,7 @@ using TheDepths.NPCs.Chasme;
 
 namespace AlternativeCompat.Depths.MStorage
 {
-    [JITWhenModsEnabled("MagicStorage")]
+    [JITWhenModsEnabled(AlternativeCompat.mStorage)]
     public class ChasmeShadowDiamond : ModSystem
     {
         [JITWhenModsEnabled(AlternativeCompat.depths)]
@@ -13,7 +13,7 @@ namespace AlternativeCompat.Depths.MStorage
 
         public override void OnModLoad()
         {
-            if (Chasme > -1 && ModLoader.TryGetMod("MagicStorage", out var mStorage))
+            if (Chasme > -1 && ModLoader.TryGetMod(AlternativeCompat.mStorage, out var mStorage))
                 mStorage.Call("Set Shadow Diamond Drop Rule", Chasme, mStorage.Call("Get Shadow Diamond Drop Rule", 1, -1));
         }
     }

@@ -14,7 +14,7 @@ namespace AlternativeCompat.Utils.MagicStorage
     /// A simple function to try and get pass a hardcoded limitation in Magic Storage for custom storage unit tiers -
     /// under normal circumstances, their tile entities are deleted when a world is unloaded and loaded back in
     /// </summary>
-    [ExtendsFromMod("MagicStorage")]
+    [ExtendsFromMod(AlternativeCompat.mStorage)]
     public class FixMSStorageUnits : TEStorageUnit
     {
         public override bool ValidTile(in Tile tile) => tile.TileFrameX % 36 == 0 && tile.TileFrameY % 36 == 0 &&

@@ -3,9 +3,11 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
+using Terraria.GameContent.Drawing;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using TheDepths;
 using TheDepths.Buffs;
 using TheDepths.Dusts;
 using TheDepths.Items;
@@ -51,22 +53,28 @@ namespace AlternativeCompat.Depths
                 // Slightly increase the player's endurance
                 Player.endurance += 0.03f;
 
-                // 10% chance to reflect hostile projectiles
+                // 10% chance to reflect hostile projectiles, but don't reflect anything set as unreflective
                 foreach (Projectile proj in Main.projectile)
                 {
-                    if (Main.rand.NextBool(10) && proj.active && proj.hostile &&
+                    // The distance calculation logic could be improved on but I'm not sure what to do for that
+                    if (!TheDepthsIDs.Sets.UnreflectiveProjectiles[proj.type] && Main.rand.NextBool(10) &&
                         (Vector2.Distance(Player.Center, proj.Center) < 5f || proj.Hitbox.Intersects(Player.Hitbox)))
                     {
-                        proj.velocity *= -1f;
-
                         proj.hostile = false;
                         proj.friendly = true;
+                        proj.velocity = -proj.oldVelocity;
+                        proj.owner = Player.whoAmI;
 
                         if (proj.damage > 0)
                         {
-                            Dust.NewDust(proj.position, proj.width, proj.height, ModContent.DustType<MercurySparkleDust>());
                             // Play the reflection sound
                             Terraria.Audio.SoundEngine.PlaySound(SoundID.Item150, Player.position);
+                            // Do particle orchestra
+                            ParticleOrchestrator.RequestParticleSpawn(clientOnly: true, ParticleOrchestraType.SilverBulletSparkle, new ParticleOrchestraSettings
+                            {
+                                PositionInWorld = proj.Center,
+                                MovementVector = Vector2.Zero
+                            }, Player.whoAmI);
                         }
                     }
                     /*else if (proj.active && proj.friendly &&(Vector2.Distance(Player.Center, proj.Center) < 5f

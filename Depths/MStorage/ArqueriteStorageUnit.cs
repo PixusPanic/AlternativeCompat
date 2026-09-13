@@ -24,7 +24,7 @@ namespace AlternativeCompat.Depths.MStorage
     // Most of this is handled automatically for you, and you just have to define the relations between the components and their tier
     // In this example, the Demonite and Crimtane tiers can be upgraded to the Example tier, which can then be upgraded to the Hellstone tier
 
-    [ExtendsFromMod("MagicStorage")]
+    [ExtendsFromMod(AlternativeCompat.mStorage)]
     internal class ArqueriteStorageUnitTier : StorageUnitTier
     {
         public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.depths);
@@ -92,7 +92,7 @@ namespace AlternativeCompat.Depths.MStorage
         }
     }
 
-    [ExtendsFromMod("MagicStorage")]
+    [ExtendsFromMod(AlternativeCompat.mStorage)]
     internal class ArqueriteStorageUnitTile : MagicStorage.Components.StorageUnit
     {
         public override string LocalizationCategory => "Depths.Tiles.MagicStorage";
@@ -125,7 +125,7 @@ namespace AlternativeCompat.Depths.MStorage
         }
     }
 
-    [ExtendsFromMod("MagicStorage")]
+    [ExtendsFromMod(AlternativeCompat.mStorage)]
     internal class ArqueriteStorageUnitItem : BaseStorageUnitItem
     {
         public override string LocalizationCategory => "Depths.Items.MagicStorage";
@@ -142,7 +142,7 @@ namespace AlternativeCompat.Depths.MStorage
         }
     }
 
-    [ExtendsFromMod("MagicStorage")]
+    [ExtendsFromMod(AlternativeCompat.mStorage)]
     internal class ArqueriteUpgrade : BaseStorageUpgradeItem
     {
         public override string LocalizationCategory => "Depths.Items.MagicStorage";
@@ -163,7 +163,7 @@ namespace AlternativeCompat.Depths.MStorage
         }
     }
 
-    [ExtendsFromMod("MagicStorage")]
+    [ExtendsFromMod(AlternativeCompat.mStorage)]
     internal class ArqueriteCore : BaseStorageCore
     {
         public override string LocalizationCategory => "Depths.Items.MagicStorage";

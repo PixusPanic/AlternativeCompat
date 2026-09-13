@@ -24,7 +24,7 @@ namespace AlternativeCompat.Contagion.MStorage
     // Most of this is handled automatically for you, and you just have to define the relations between the components and their tier
     // In this example, the Demonite and Crimtane tiers can be upgraded to the Example tier, which can then be upgraded to the Hellstone tier
 
-    [ExtendsFromMod("MagicStorage")]
+    [ExtendsFromMod(AlternativeCompat.mStorage)]
     internal class BacciliteStorageUnitTier : StorageUnitTier
     {
         public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.avalon);
@@ -90,7 +90,7 @@ namespace AlternativeCompat.Contagion.MStorage
         }
     }
 
-    [ExtendsFromMod("MagicStorage")]
+    [ExtendsFromMod(AlternativeCompat.mStorage)]
     internal class BacciliteStorageUnitTile : MagicStorage.Components.StorageUnit
     {
         public override string LocalizationCategory => "Contagion.Tiles.MagicStorage";
@@ -123,7 +123,7 @@ namespace AlternativeCompat.Contagion.MStorage
         }
     }
 
-    [ExtendsFromMod("MagicStorage")]
+    [ExtendsFromMod(AlternativeCompat.mStorage)]
     internal class BacciliteStorageUnitItem : BaseStorageUnitItem
     {
         public override string LocalizationCategory => "Contagion.Items.MagicStorage";
@@ -140,7 +140,7 @@ namespace AlternativeCompat.Contagion.MStorage
         }
     }
 
-    [ExtendsFromMod("MagicStorage")]
+    [ExtendsFromMod(AlternativeCompat.mStorage)]
     internal class BacciliteUpgrade : BaseStorageUpgradeItem
     {
         public override string LocalizationCategory => "Contagion.Items.MagicStorage";
@@ -161,7 +161,7 @@ namespace AlternativeCompat.Contagion.MStorage
         }
     }
 
-    [ExtendsFromMod("MagicStorage")]
+    [ExtendsFromMod(AlternativeCompat.mStorage)]
     internal class BacciliteCore : BaseStorageCore
     {
         public override string LocalizationCategory => "Contagion.Items.MagicStorage";
