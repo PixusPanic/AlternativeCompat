@@ -10,7 +10,7 @@ namespace AlternativeCompat.Utils.SpiritReforged
     [JITWhenModsEnabled(AlternativeCompat.spirit)]
     public class SpiritReforgedHelpers : ModSystem
     {
-        // Because these are internal in spirit Reforged, the functions need to be copied over here
+        // Because these are internal in Spirit Reforged, the functions need to be copied over here
         #region Pots
         public static float CalculateCoinValue()
         {

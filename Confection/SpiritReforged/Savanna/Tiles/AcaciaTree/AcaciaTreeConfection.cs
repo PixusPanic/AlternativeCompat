@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SpiritReforged.Common.TileCommon;
 using SpiritReforged.Common.TileCommon.Conversion;
+using SpiritReforged.Common.TileCommon.PresetTiles;
 using SpiritReforged.Content.Savanna.Tiles;
 using Terraria;
 using Terraria.ID;
@@ -75,5 +76,12 @@ namespace AlternativeCompat.Confection.SpiritReforged.Savanna.Tiles.AcaciaTree
                 spriteBatch.Draw(texture, position + new Vector2(10, 0), source, color, rotation, origin, 1, SpriteEffects.None, 0);
             }
         }
+    }
+
+    [ExtendsFromMod(AlternativeCompat.spirit)]
+    [JITWhenModsEnabled(AlternativeCompat.confection)]
+    public class AcaciaSaplingConfection : SaplingTile<AcaciaTreeConfection>
+    {
+        public override int[] AnchorTypes => [ModContent.TileType<SavannaGrassConfection>(), ModContent.TileType<SavannaGrassConfectionMowed>()];
     }
 }

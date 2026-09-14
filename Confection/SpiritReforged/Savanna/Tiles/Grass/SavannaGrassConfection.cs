@@ -91,6 +91,7 @@ namespace AlternativeCompat.Confection.SpiritReforged.Savanna.Tiles.Grass
     {
         public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.confection);
 
+
         public override void PreAddObjectData()
         {
             //base.PreAddObjectData();
@@ -112,7 +113,8 @@ namespace AlternativeCompat.Confection.SpiritReforged.Savanna.Tiles.Grass
         public override void PreAddObjectData()
         {
             //base.PreAddObjectData();
-            TileObjectData.newTile.AnchorValidTiles = [ModContent.TileType<SavannaGrassConfection>(), ModContent.TileType<SavannaGrassConfectionMowed>()];
+            TileObjectData.newTile.AnchorValidTiles = [ModContent.TileType<SavannaGrassConfection>(), ModContent.TileType<SavannaGrassConfectionMowed>(),
+                SavannaConfectionConversion.creamsand];
 
             ConfectionIDs.Sets.Confection[Type] = true;
             ConfectionIDs.Sets.IsNaturalConfectionTile[Type] = true;
