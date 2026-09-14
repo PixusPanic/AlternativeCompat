@@ -1,9 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using SpiritReforged.Common.ItemCommon;
-using SpiritReforged.Common.Misc;
 using SpiritReforged.Common.TileCommon;
+using SpiritReforged.Common.TileCommon.PresetTiles;
 using SpiritReforged.Common.UI.PotCatalogue;
-using SpiritReforged.Content.Underground.Tiles;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
@@ -14,7 +13,7 @@ using Terraria.ModLoader;
 namespace AlternativeCompat.Utils.SpiritReforged
 {
     [ExtendsFromMod(AlternativeCompat.spirit)]
-    public abstract class PotTileBase : BiomePots, ILootable
+    public abstract class PotTileBase : PotTile
     {
         public virtual string TileRecord => "Mods.AlternativeCompat.Tiles.SpiritReforged.Records";
 

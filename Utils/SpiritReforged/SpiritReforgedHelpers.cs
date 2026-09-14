@@ -1,11 +1,13 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using MonoMod.Utils;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
+using static SpiritReforged.Common.TileCommon.Conversion.ConversionHandler;
 
 namespace AlternativeCompat.Utils.SpiritReforged
 {
-    [JITWhenModsEnabled("SpiritReforged")]
+    [JITWhenModsEnabled(AlternativeCompat.spirit)]
     public class SpiritReforgedHelpers : ModSystem
     {
         // Because these are internal in spirit Reforged, the functions need to be copied over here
@@ -123,6 +125,16 @@ namespace AlternativeCompat.Utils.SpiritReforged
 
         #region Trees
         public static Vector2 GetPalmTreeOffset(int i, int j) => new(Framing.GetTileSafely(i, j).TileFrameY - 2, 0);
+        #endregion
+
+        #region Conversion
+        public static void AddConversionSet(string name, Set set) => CreateSet(name, set);
+        public static void AddConversionSet(string name, Dictionary<int, int> dict)
+        {
+            var set = new Set();
+            set.AddRange(dict);
+            CreateSet(name, set);
+        }
         #endregion
     }
 }

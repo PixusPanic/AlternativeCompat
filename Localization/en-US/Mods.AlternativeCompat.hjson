@@ -6,6 +6,11 @@ Configs: {
 			Label: Magic Storage Warning
 			Tooltip: Shows up a warning in the item text for any cross-mod storage unit or core.
 		}
+
+		DebugMessages: {
+			Label: Debug Messages
+			Tooltip: ""
+		}
 	}
 
 	AltCompatConfig: {

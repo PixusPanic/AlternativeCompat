@@ -11,11 +11,25 @@ using TheDepths.Items.Weapons;
 
 namespace AlternativeCompat.Depths.MStorage
 {
+    public class DepthsMStorageTweaks : ModSystem {
+        public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.mStorage) && ModLoader.HasMod(AlternativeCompat.depths);
+
+        [JITWhenModsEnabled(AlternativeCompat.mStorage)]
+        private int HellstoneUpgrade => ModContent.ItemType<UpgradeHellstone>();
+
+        public override void PostSetupContent()
+        {
+            if (ModContent.GetInstance<AltCompatConfig>().RequireAltMaterials && HellstoneUpgrade > -1
+                && ModLoader.TryGetMod(AlternativeCompat.depths, out var depths))
+                depths.Call("HellstoneBarOnlyItem", HellstoneUpgrade, true);
+        }
+    }
+
     [JITWhenModsEnabled(AlternativeCompat.depths)]
     public class AddQuicksilverToMS : ModSystem
     {
         public override bool IsLoadingEnabled(Mod mod) =>
-            ModLoader.HasMod(AlternativeCompat.mStorage);
+            ModLoader.HasMod(AlternativeCompat.mStorage) && ModLoader.HasMod(AlternativeCompat.depths);
 
         #region Detour Biome Globe
         public override void Load()
@@ -53,15 +67,8 @@ namespace AlternativeCompat.Depths.MStorage
         }
         #endregion
 
-        [JITWhenModsEnabled(AlternativeCompat.mStorage)]
-        private int HellstoneUpgrade => ModContent.ItemType<UpgradeHellstone>();
-
         public override void OnModLoad()
         {
-            if (ModContent.GetInstance<AltCompatConfig>().RequireAltMaterials && HellstoneUpgrade > -1
-                && ModLoader.TryGetMod(AlternativeCompat.depths, out var depths))
-                depths.Call("HellstoneBarOnlyItem", HellstoneUpgrade, true);
-
             var MS = ModLoader.GetMod(AlternativeCompat.mStorage).Code;
             if (MS == null) return;
 

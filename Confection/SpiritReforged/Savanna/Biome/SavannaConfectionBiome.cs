@@ -2,6 +2,7 @@
 using AlternativeCompat.Confection.SpiritReforged.Savanna.Tiles.AcaciaTree;
 using AlternativeCompat.Confection.SpiritReforged.Savanna.Tiles.Grass;
 using AlternativeCompat.Utils;
+using SpiritReforged.Common.Misc;
 using SpiritReforged.Content.Savanna.Biome;
 using SpiritReforged.Content.Savanna.Tiles;
 using SpiritReforged.Content.Savanna.Tiles.AcaciaTree;
@@ -27,8 +28,53 @@ namespace AlternativeCompat.Confection.SpiritReforged.Savanna.Biome
 
         public override string MapBackground => BackgroundPath;
     }*/
+    [JITWhenModsEnabled(AlternativeCompat.spirit)]
+    public class SavannaConfectionScene : ModSceneEffect
+    {
+        //public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.confection);
 
-    /*[JITWhenModsEnabled(AlternativeCompat.spirit)]
+        private int SelectMusic()
+        {
+            if (Main.LocalPlayer.townNPCs > 2f)
+                return -1;
+
+            if (Main.swapMusic)
+            {
+                if (Main.drunkWorld && !Main.remixWorld)
+                    return MusicHelper.DecideOnNewConfectionMusic();
+                else
+                    return MusicHelper.DecideOnTOWConfectionMusic();
+            }
+            else if (!Main.gameMenu && Main.drunkWorld && !Main.remixWorld)
+                return MusicHelper.DecideOnTOWConfectionMusic();
+            else
+                return MusicHelper.DecideOnNewConfectionMusic();
+        }
+
+        public override SceneEffectPriority Priority => SceneEffectPriority.BiomeHigh;
+        public override int Music => SelectMusic();
+        public override ModSurfaceBackgroundStyle SurfaceBackgroundStyle => ModContent.GetInstance<SavannaConfectionBGStyle>();
+
+        public override void SetStaticDefaults()
+        {
+            ConfectionCompat();
+        }
+
+        [JITWhenModsEnabled(AlternativeCompat.confection)]
+        private static void ConfectionCompat()
+        {
+            SceneTileCounter.SurveyByType.Add(ModContent.GetInstance<SavannaBiome>().Type, new([ModContent.TileType<SavannaGrassConfection>(),
+            ModContent.TileType<SavannaGrassConfectionMowed>()], 400));
+        }
+
+        public override bool IsSceneEffectActive(Player player) => InConfection(player) &&
+            SceneTileCounter.SurveyByType[ModContent.GetInstance<SavannaBiome>().Type].Success;
+
+        [JITWhenModsEnabled(AlternativeCompat.confection)]
+        private static bool InConfection(Player player) => ConfectionCheckTileCount.InConfection(player);
+    }
+
+    [JITWhenModsEnabled(AlternativeCompat.spirit)]
     public class SavannaConfectionBGStyle : ModSurfaceBackgroundStyle
     {
         public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.confection);
@@ -58,5 +104,5 @@ namespace AlternativeCompat.Confection.SpiritReforged.Savanna.Biome
                         fades[i] = 0f;
                 }
         }
-    }*/
+    }
 }

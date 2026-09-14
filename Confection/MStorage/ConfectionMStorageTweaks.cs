@@ -15,7 +15,7 @@ namespace AlternativeCompat.Confection.MStorage
         [JITWhenModsEnabled(AlternativeCompat.mStorage)]
         private int HallowedUpgrade => ModContent.ItemType<UpgradeHallowed>();
 
-        public override void OnModLoad()
+        public override void PostSetupContent()
         {
             if (ModContent.GetInstance<AltCompatConfig>().RequireAltMaterials && HallowedUpgrade > -1
                 && ModLoader.TryGetMod(AlternativeCompat.confection, out var confection))

@@ -39,5 +39,8 @@ namespace AlternativeCompat
 
         [DefaultValue(true)]
         public bool MStorageWarning { get; set; }
+
+        [DefaultValue(false)]
+        public bool DebugMessages { get; set; }
     }
 }

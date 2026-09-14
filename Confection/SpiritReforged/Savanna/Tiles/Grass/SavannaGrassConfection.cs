@@ -12,7 +12,7 @@ using TheConfectionRebirth.Dusts;
 
 namespace AlternativeCompat.Confection.SpiritReforged.Savanna.Tiles.Grass
 {
-    [ExtendsFromMod(AlternativeCompat.spirit)]
+    [ExtendsFromMod(AlternativeCompat.spirit, AlternativeCompat.confection)]
     public class SavannaGrassConfection : SavannaGrass
     {
         public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.confection);
@@ -28,7 +28,8 @@ namespace AlternativeCompat.Confection.SpiritReforged.Savanna.Tiles.Grass
             ConfectionIDs.Sets.Confection[Type] = true;
             ConfectionIDs.Sets.IsNaturalConfectionTile[Type] = true;
 
-            TileMethods.Merge(Type, ModContent.TileType<SavannaGrass>(), ModContent.TileType<SavannaGrassCorrupt>(), ModContent.TileType<SavannaGrassHallow>(), ModContent.TileType<SavannaGrassCrimson>());
+            TileMethods.Merge(Type, ModContent.TileType<SavannaGrass>(), ModContent.TileType<SavannaGrassCorrupt>(),
+                ModContent.TileType<SavannaGrassHallow>(), ModContent.TileType<SavannaGrassCrimson>());
         }
 
         public override void RandomUpdate(int i, int j)
@@ -64,7 +65,7 @@ namespace AlternativeCompat.Confection.SpiritReforged.Savanna.Tiles.Grass
         }
     }
 
-    [ExtendsFromMod(AlternativeCompat.spirit)]
+    [ExtendsFromMod(AlternativeCompat.spirit, AlternativeCompat.confection)]
     public class SavannaGrassConfectionMowed : SavannaGrassMowed
     {
         public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.confection);
@@ -74,44 +75,54 @@ namespace AlternativeCompat.Confection.SpiritReforged.Savanna.Tiles.Grass
         {
             base.SetStaticDefaults();
 
+            ConfectionIDs.Sets.ConfectionBiomeSight[Type] = true;
             ConfectionIDs.Sets.Confection[Type] = true;
             ConfectionIDs.Sets.IsNaturalConfectionTile[Type] = true;
 
-            TileMethods.Merge(Type, ModContent.TileType<SavannaGrass>(), ModContent.TileType<SavannaGrassCorrupt>(), ModContent.TileType<SavannaGrassHallow>(), ModContent.TileType<SavannaGrassCrimson>());
+            TileMethods.Merge(Type, ModContent.TileType<SavannaGrass>(), ModContent.TileType<SavannaGrassCorrupt>(),
+                ModContent.TileType<SavannaGrassHallow>(), ModContent.TileType<SavannaGrassCrimson>(), ModContent.TileType<SavannaGrassConfection>());
         }
 
         public override void RandomUpdate(int i, int j) => WorldGen.SpreadInfectionToNearbyTile(i, j, GetConfectionBiomeConversion.ConvID);
     }
 
-    [ExtendsFromMod(AlternativeCompat.spirit)]
+    [ExtendsFromMod(AlternativeCompat.spirit, AlternativeCompat.confection)]
     public class SavannaFoliageConfection : SavannaFoliage
     {
         public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.confection);
 
         public override void PreAddObjectData()
         {
-            TileObjectData.newTile.AnchorValidTiles = [ModContent.TileType<SavannaGrassConfection>()];
+            //base.PreAddObjectData();
+            TileObjectData.newTile.AnchorValidTiles = [ModContent.TileType<SavannaGrassConfection>(), ModContent.TileType<SavannaGrassConfectionMowed>()];
+
+            ConfectionIDs.Sets.Confection[Type] = true;
+            ConfectionIDs.Sets.IsNaturalConfectionTile[Type] = true;
 
             DustType = ModContent.DustType<CreamDust>();
             AddMapEntry(new(235, 207, 150));
         }
     }
 
-    [ExtendsFromMod(AlternativeCompat.spirit)]
+    [ExtendsFromMod(AlternativeCompat.spirit, AlternativeCompat.confection)]
     public class SavannaShrubsConfection : SavannaShrubs
     {
         public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.confection);
 
         public override void PreAddObjectData()
         {
-            TileObjectData.newTile.AnchorValidTiles = [ModContent.TileType<SavannaGrassConfection>()];
+            //base.PreAddObjectData();
+            TileObjectData.newTile.AnchorValidTiles = [ModContent.TileType<SavannaGrassConfection>(), ModContent.TileType<SavannaGrassConfectionMowed>()];
+
+            ConfectionIDs.Sets.Confection[Type] = true;
+            ConfectionIDs.Sets.IsNaturalConfectionTile[Type] = true;
 
             DustType = ModContent.DustType<CreamDust>();
             AddMapEntry(new(235, 207, 150));
         }
     }
 
-    [ExtendsFromMod(AlternativeCompat.spirit)]
+    [ExtendsFromMod(AlternativeCompat.spirit, AlternativeCompat.confection)]
     [DrawOrder(DrawOrderAttribute.Layer.NonSolid, DrawOrderAttribute.Layer.OverPlayers)]
     public class ElephantGrassConfection : ElephantGrass
     {
@@ -119,7 +130,11 @@ namespace AlternativeCompat.Confection.SpiritReforged.Savanna.Tiles.Grass
 
         public override void PreAddObjectData()
         {
-            TileObjectData.newTile.AnchorValidTiles = [ModContent.TileType<SavannaGrassConfection>()];
+            //base.PreAddObjectData();
+            TileObjectData.newTile.AnchorValidTiles = [ModContent.TileType<SavannaGrassConfection>(), ModContent.TileType<SavannaGrassConfectionMowed>()];
+
+            ConfectionIDs.Sets.Confection[Type] = true;
+            ConfectionIDs.Sets.IsNaturalConfectionTile[Type] = true;
 
             ConfectionIDs.Sets.Confection[Type] = true;
             ConfectionIDs.Sets.IsNaturalConfectionTile[Type] = true;
@@ -129,14 +144,15 @@ namespace AlternativeCompat.Confection.SpiritReforged.Savanna.Tiles.Grass
         }
     }
 
-    [ExtendsFromMod(AlternativeCompat.spirit)]
+    [ExtendsFromMod(AlternativeCompat.spirit, AlternativeCompat.confection)]
     public class SavannaVineConfection : SavannaVine
     {
         public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.confection);
 
         public override void PreAddObjectData()
         {
-            TileObjectData.newTile.AnchorValidTiles = [ModContent.TileType<SavannaGrassConfection>()];
+            //base.PreAddObjectData();
+            TileObjectData.newTile.AnchorValidTiles = [ModContent.TileType<SavannaGrassConfection>(), ModContent.TileType<SavannaGrassConfectionMowed>()];
 
             ConfectionIDs.Sets.Confection[Type] = true;
             ConfectionIDs.Sets.IsNaturalConfectionTile[Type] = true;

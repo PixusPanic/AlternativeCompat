@@ -57,8 +57,8 @@ namespace AlternativeCompat.Depths
                 foreach (Projectile proj in Main.projectile)
                 {
                     // The distance calculation logic could be improved on but I'm not sure what to do for that
-                    if (!TheDepthsIDs.Sets.UnreflectiveProjectiles[proj.type] && Main.rand.NextBool(10) &&
-                        (Vector2.Distance(Player.Center, proj.Center) < 5f || proj.Hitbox.Intersects(Player.Hitbox)))
+                    if (!TheDepthsIDs.Sets.UnreflectiveProjectiles[proj.type] && Main.rand.NextBool(10) && proj.hostile &&
+                        !proj.friendly && (Vector2.Distance(Player.Center, proj.Center) < 5f || proj.Hitbox.Intersects(Player.Hitbox)))
                     {
                         proj.hostile = false;
                         proj.friendly = true;

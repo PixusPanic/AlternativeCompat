@@ -1,26 +1,18 @@
 ﻿using AlternativeCompat.Utils.SpiritReforged;
 using Microsoft.Xna.Framework;
-using Mono.Cecil;
-using SpiritReforged.Common.ItemCommon;
-using SpiritReforged.Common.Misc;
 using SpiritReforged.Common.TileCommon;
-using SpiritReforged.Common.UI.PotCatalogue;
-using SpiritReforged.Common.WorldGeneration;
-using SpiritReforged.Content.Forest.Cloud.Items;
-using SpiritReforged.Content.Underground.Items;
+using SpiritReforged.Content.Underground.Pottery;
 using SpiritReforged.Content.Underground.Tiles;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
-using Terraria.GameContent.ItemDropRules;
 using Terraria.ID;
-using Terraria.Localization;
 using Terraria.ModLoader;
+using TheDepths.Items.Placeable;
 
 namespace AlternativeCompat.Depths.SpiritReforged
 {
-    [ExtendsFromMod(AlternativeCompat.spirit)]
+    [ExtendsFromMod(AlternativeCompat.spirit, AlternativeCompat.depths)]
     public class DepthsPots : PotTileBase
     {
         public override string TileRecord => "Mods.AlternativeCompat.TheDepths.Tiles.SpiritReforged.Records";
@@ -54,36 +46,42 @@ namespace AlternativeCompat.Depths.SpiritReforged
             var pos = new Vector2(i, j).ToWorldCoordinates(16, 16);
 
             SoundEngine.PlaySound(SoundID.Shatter, pos);
-            SoundEngine.PlaySound(Break, pos);
+            SoundEngine.PlaySound(BiomePots.Break, pos);
 
             return false;
         }
 
-        /*public void AddLoot(ILoot loot)
+        public override void AddItemRecipes(ModItem modItem, NamedStyles.StyleGroup group, Condition condition)
         {
-            List<int> potions = [ItemID.SpelunkerPotion, ItemID.HunterPotion,
-            ItemID.GravitationPotion, ItemID.LifeforcePotion, ItemID.TitanPotion, ItemID.BattlePotion,
-            ItemID.MagicPowerPotion, ItemID.ManaRegenerationPotion, ItemID.BiomeSightPotion, ItemID.HeartreachPotion,
-            ModContent.ItemType<DoubleJumpPotion>(), WorldGen.crimson ? ItemID.RagePotion : ItemID.WrathPotion];
+            modItem.CreateRecipe().AddRecipeGroup("ClayAndMud", 3).AddIngredient(ModContent.ItemType<Quartz>(), 2).
+                AddTile(ModContent.TileType<PotteryWheel>()).AddCondition(condition).Register();
+        }
 
-            if (ModContent.TryFind(AlternativeCompat.depths, "SilverSpherePotion", out ModItem silverSphere))
-                potions.Add(silverSphere.Type);
-            if (ModContent.TryFind(AlternativeCompat.depths, "CrystalSkinPotion", out ModItem crystalSkin))
-                potions.Add(crystalSkin.Type);
+            /*public void AddLoot(ILoot loot)
+            {
+                List<int> potions = [ItemID.SpelunkerPotion, ItemID.HunterPotion,
+                ItemID.GravitationPotion, ItemID.LifeforcePotion, ItemID.TitanPotion, ItemID.BattlePotion,
+                ItemID.MagicPowerPotion, ItemID.ManaRegenerationPotion, ItemID.BiomeSightPotion, ItemID.HeartreachPotion,
+                ModContent.ItemType<DoubleJumpPotion>(), WorldGen.crimson ? ItemID.RagePotion : ItemID.WrathPotion];
 
-            var pCond0 = ItemDropRule.OneFromOptions(15, [.. potions]);
-            var pCond1 = ItemDropRule.OneFromOptions(3, ItemID.PotionOfReturn, ItemID.LuckPotionLesser);
+                if (ModContent.TryFind(AlternativeCompat.depths, "SilverSpherePotion", out ModItem silverSphere))
+                    potions.Add(silverSphere.Type);
+                if (ModContent.TryFind(AlternativeCompat.depths, "CrystalSkinPotion", out ModItem crystalSkin))
+                    potions.Add(crystalSkin.Type);
 
-            pCond0.OnSuccess(pCond1);
-            pCond1.OnFailedRoll(ItemDropRule.Common(ItemID.LuckPotion, 5));
+                var pCond0 = ItemDropRule.OneFromOptions(15, [.. potions]);
+                var pCond1 = ItemDropRule.OneFromOptions(3, ItemID.PotionOfReturn, ItemID.LuckPotionLesser);
 
-            loot.Add(pCond0);
+                pCond0.OnSuccess(pCond1);
+                pCond1.OnFailedRoll(ItemDropRule.Common(ItemID.LuckPotion, 5));
 
-            loot.Add(ItemDropRule.ByCondition(new DropConditions.Standard(Condition.Multiplayer), ItemID.WormholePotion, 30));
-            loot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<PrefixVoucher>(), 30, 25));
+                loot.Add(pCond0);
 
-            if (ModContent.TryFind(AlternativeCompat.depths, "CrystalSkinPotion", out ModItem smokeBlock))
-                loot.AddCommon(smokeBlock.Type, 2, 10, 15);
-        }*/
-    }
+                loot.Add(ItemDropRule.ByCondition(new DropConditions.Standard(Condition.Multiplayer), ItemID.WormholePotion, 30));
+                loot.Add(ItemDropRule.NormalvsExpert(ModContent.ItemType<PrefixVoucher>(), 30, 25));
+
+                if (ModContent.TryFind(AlternativeCompat.depths, "CrystalSkinPotion", out ModItem smokeBlock))
+                    loot.AddCommon(smokeBlock.Type, 2, 10, 15);
+            }*/
+        }
 }

@@ -9,31 +9,36 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
+using TheConfectionRebirth;
+using TheConfectionRebirth.Items.Placeable;
+using TheConfectionRebirth.Tiles.Trees;
 using SpiritAcaciaTree = SpiritReforged.Content.Savanna.Tiles.AcaciaTree.AcaciaTree;
 
 namespace AlternativeCompat.Confection.SpiritReforged.Savanna.Tiles.AcaciaTree
 {
-    [ExtendsFromMod(AlternativeCompat.spirit)]
+    [ExtendsFromMod(AlternativeCompat.spirit, AlternativeCompat.confection)]
     public class AcaciaTreeConfection : SpiritAcaciaTree
     {
         public override bool IsLoadingEnabled(Mod mod) => ModLoader.HasMod(AlternativeCompat.confection);
 
         private readonly int TreeVariants = 3;
 
-        public new ConversionHandler.Set ConversionSet => new()
+        /*public new ConversionHandler.Set ConversionSet => new()
         {
             { ModContent.TileType<SavannaGrassConfection>(), ModContent.TileType<AcaciaTreeConfection>() },
-        };
+        };*/
 
         public override void PreAddObjectData()
         {
-            base.PreAddObjectData();
+            TileObjectData.newTile.AnchorValidTiles = [ModContent.TileType<SavannaGrassConfection>(), ModContent.TileType<SavannaGrassConfectionMowed>()];
+            
+            ConfectionIDs.Sets.Confection[Type] = true;
+            //RegisterItemDrop(ModContent.ItemType<CreamWood>());
 
-            TileObjectData.newTile.AnchorValidTiles = [ModContent.TileType<SavannaGrassHallow>(), ModContent.TileType<SavannaGrassHallowMowed>()];
-            TileID.Sets.Hallow[Type] = true;
+            //ConfectionIDs.Sets.IsNaturalConfectionTile[Type] = true;
         }
 
-        protected override void OnGrowEffects(int i, int j, int height, int goreType) => base.OnGrowEffects(i, j, height, GoreID.TreeLeaf_Hallow);
+        protected override void OnGrowEffects(int i, int j, int height, int goreType) => base.OnGrowEffects(i, j, height, ModContent.GoreType<CreamTreeLeaf>());
 
         public override void DrawTreeFoliage(int i, int j, SpriteBatch spriteBatch)
         {
