@@ -15,9 +15,11 @@ using Terraria.ModLoader;
 using TheDepths.Dusts;
 using TheDepths.Tiles;
 using TheDepths.Worldgen;
+using static Terraria.Map.MapHelper;
 
 namespace AlternativeCompat.Depths
 {
+    /*
     [JITWhenModsEnabled(AlternativeCompat.depths)]
     public class DepthsModdedGems
     {
@@ -26,12 +28,12 @@ namespace AlternativeCompat.Depths
             /// <summary>
             /// The number of merging shale tiles added by The Depths.
             /// </summary>
-            internal static int _originalShaleTileCount;
+            internal static int OriginalShaleTileCount;
 
 			/// <summary>
 			/// Tiles that merge with all shale tiles.
 			/// </summary>
-			internal static readonly List<int> _mergingShaleTiles = new List<int>
+			internal static readonly List<int> MergingShaleTiles = new List<int>
             {
                 /*ModContent.TileType<ShaleBlock>(),
                 ModContent.TileType<Shalestone>(),
@@ -40,18 +42,18 @@ namespace AlternativeCompat.Depths
                 ModContent.TileType<ShalestoneEmerald>(),
                 ModContent.TileType<ShalestoneRuby>(),
                 ModContent.TileType<ShalestoneSapphire>(),
-                ModContent.TileType<ShalestoneTopaz>()*/
+                ModContent.TileType<ShalestoneTopaz>()#1#
             };
 
             /// <summary>
-            /// The frequencies of each tile in <see cref="_mergingShaleTiles"/> past <see cref="_originalShaleTileCount"/>.
+            /// The frequencies of each tile in <see cref="MergingShaleTiles"/> past <see cref="OriginalShaleTileCount"/>.
             /// </summary>
-            private static readonly List<float> _customFrequencies = new();
+            private static readonly List<float> CustomFrequencies = new();
 
 			/// <summary>
 			/// The generated texture for each added shale tile.
 			/// </summary>
-			private static readonly Dictionary<int, Asset<Texture2D>> _tileTypeToAsset = new();
+			private static readonly Dictionary<int, Asset<Texture2D>> TileTypeToAsset = new();
 
 			/// <summary>
 			/// The texture of <see cref="Shalestone"/>.
@@ -70,21 +72,21 @@ namespace AlternativeCompat.Depths
                 if (ModLoader.TryGetMod(AlternativeCompat.depths, out var depths)) {
 
                     if (depths.TryFind("ShaleBlock", out ModTile shale))
-                        _mergingShaleTiles.Add(shale.Type);
+                        MergingShaleTiles.Add(shale.Type);
                     if (depths.TryFind("Shalestone", out ModTile shalestone))
-                        _mergingShaleTiles.Add(shalestone.Type);
+                        MergingShaleTiles.Add(shalestone.Type);
                     if (depths.TryFind("ShalestoneAmethyst", out ModTile shalestoneAmethyst))
-                        _mergingShaleTiles.Add(shalestoneAmethyst.Type);
+                        MergingShaleTiles.Add(shalestoneAmethyst.Type);
                     if (depths.TryFind("ShalestoneDiamond", out ModTile shalestoneDiamond))
-                        _mergingShaleTiles.Add(shalestoneDiamond.Type);
+                        MergingShaleTiles.Add(shalestoneDiamond.Type);
                     if (depths.TryFind("ShalestoneEmerald", out ModTile shalestoneEmerald))
-                        _mergingShaleTiles.Add(shalestoneEmerald.Type);
+                        MergingShaleTiles.Add(shalestoneEmerald.Type);
                     if (depths.TryFind("ShalestoneRuby", out ModTile shalestoneRuby))
-                        _mergingShaleTiles.Add(shalestoneRuby.Type);
+                        MergingShaleTiles.Add(shalestoneRuby.Type);
                     if (depths.TryFind("ShalestoneSapphire", out ModTile shalestoneSapphire))
-                        _mergingShaleTiles.Add(shalestoneSapphire.Type);
+                        MergingShaleTiles.Add(shalestoneSapphire.Type);
                     if (depths.TryFind("OnyxShalestone", out ModTile shalestoneOnyx))
-                        _mergingShaleTiles.Add(shalestoneOnyx.Type);
+                        MergingShaleTiles.Add(shalestoneOnyx.Type);
                 }
 
 				if (ModTileTextureBypass.Failed)
@@ -145,7 +147,7 @@ namespace AlternativeCompat.Depths
 
             public override void Load()
 			{
-				_originalShaleTileCount = _mergingShaleTiles.Count;
+				OriginalShaleTileCount = MergingShaleTiles.Count;
 
                 if (_gemsList != null)
 				{
@@ -154,7 +156,7 @@ namespace AlternativeCompat.Depths
                         var gemList = orig() ?? [];
 
                         // Add the new gem tiles, then make sure there aren't any copies of the same ID
-                        var newGems = _mergingShaleTiles.Skip(_originalShaleTileCount);
+                        var newGems = MergingShaleTiles.Skip(OriginalShaleTileCount);
                         return gemList.Concat(newGems).Distinct().ToArray();
                     }));
 					_gemsListHook.Apply();
@@ -167,8 +169,8 @@ namespace AlternativeCompat.Depths
 				if (_gemsList != null)
 					_gemsListHook?.Undo();
 
-				_tileTypeToAsset?.Clear();
-				_mergingShaleTiles?.Clear();
+				TileTypeToAsset?.Clear();
+				MergingShaleTiles?.Clear();
 				_shaleTexture = null;
 				_gemsList = null;
 			}
@@ -198,7 +200,7 @@ namespace AlternativeCompat.Depths
 						Main.tileMerge[baseMergingTile][otherMergingTile] = true;
 					}
 				}
-			}*/
+			}#1#
 
 			/// <summary>
 			/// Adds a type of gem to spawn in The Depths.
@@ -213,7 +215,7 @@ namespace AlternativeCompat.Depths
 				string internalName = ItemLoader.GetItem(gemItemId).Name;
 				ShaleGemTile instance = new(gemItemId, gemTileId, internalName);
 				mod.AddContent(instance);
-				_mergingShaleTiles.Add(instance.Type);
+				MergingShaleTiles.Add(instance.Type);
 				//_customFrequencies.Add(frequency);
 				Main.QueueMainThreadAction(() => GenerateTextureForTile(mod, instance.Type, gemTileId, gemBaseTileId, internalName));
 			}
@@ -229,13 +231,13 @@ namespace AlternativeCompat.Depths
 				_shaleTexture ??= GetTileTexture(ModContent.TileType<Shalestone>());
 				Texture2D gems = TextureHelper.GetOverlaidTexture(GetTileTexture(gemBaseTileId), GetTileTexture(gemTileId));
 				Texture2D shaleGems = TextureHelper.OverlayTextures(_shaleTexture, gems);
-				_tileTypeToAsset[tileType] = TextureHelper.CreateAssetFromTexture(shaleGems, $"ModCompatTweaks/Assets/TheDepths/Shalestone{gemInternalName}", mod);
+				TileTypeToAsset[tileType] = TextureHelper.CreateAssetFromTexture(shaleGems, $"ModCompatTweaks/Assets/TheDepths/Shalestone{gemInternalName}", mod);
 			}
 
 			internal static Asset<Texture2D> GetTexture(ushort type)
 			{
 				// If this fails, let it throw.
-				return _tileTypeToAsset[type];
+				return TileTypeToAsset[type];
 			}
 		}
 
@@ -279,10 +281,13 @@ namespace AlternativeCompat.Depths
 
                 //LocalizedText originalText = Lang._mapLegendCache[MapHelper.TileToLookup(_gemTileId, 0)];
                 ModTile originalTile = TileLoader.GetTile(_gemTileId);
-                MapTile mapTile = MapTile.Create((ushort)_gemTileId, byte.MaxValue, 0);
-                Color color = MapHelper.GetMapTileXnaColor(ref mapTile);
+                MapTile mapTile = MapTile.Create((ushort)_gemTileId,
+	                byte.MaxValue,
+	                (byte)0x80u);
+                Color color = GetMapTileXnaColor(ref mapTile);
 
-                AddMapEntry(color, Language.GetOrRegister(originalTile.Mod.GetLocalizationKey("MapObject." + originalTile.Name)));
+                AddMapEntry(color,
+	                Language.GetOrRegister(originalTile.Mod.GetLocalizationKey("MapObject." + originalTile.Name)));
 
                 // Tile merging is handled in DepthsGemSystemGlobalTile
             }
@@ -298,13 +303,13 @@ namespace AlternativeCompat.Depths
 		{
             public override void SetStaticDefaults()
 			{
-                if (DepthsGemSystem._mergingShaleTiles.Count == 0) return;
+                if (DepthsGemSystem.MergingShaleTiles.Count == 0) return;
 
-                if (DepthsGemSystem._mergingShaleTiles.Count != DepthsGemSystem._originalShaleTileCount)
+                if (DepthsGemSystem.MergingShaleTiles.Count != DepthsGemSystem.OriginalShaleTileCount)
                 {
-                    foreach (int baseMergingTile in DepthsGemSystem._mergingShaleTiles)
+                    foreach (int baseMergingTile in DepthsGemSystem.MergingShaleTiles)
                     {
-                        foreach (int otherMergingTile in DepthsGemSystem._mergingShaleTiles)
+                        foreach (int otherMergingTile in DepthsGemSystem.MergingShaleTiles)
                         {
                             Main.tileMerge[baseMergingTile][otherMergingTile] = true;
                             Main.tileMerge[otherMergingTile][baseMergingTile] = true;
@@ -345,6 +350,7 @@ namespace AlternativeCompat.Depths
 					verdant.TryFind("AquamarineItem", out ModItem aquamarineVeItem) && verdant.TryFind("Aquamarine", out ModTile aquamarineVeTile))
 					AddShaleGem(aquamarineVeItem.Type, aquamarineVeTile.Type, TileID.Stone);
             }
+        
         }
-	}
+	}*/
 }
