@@ -14,6 +14,7 @@ using Terraria.Map;
 using Terraria.ModLoader;
 using TheDepths.Dusts;
 using TheDepths.Tiles;
+using TheDepths.Worldgen;
 
 namespace AlternativeCompat.Depths
 {
