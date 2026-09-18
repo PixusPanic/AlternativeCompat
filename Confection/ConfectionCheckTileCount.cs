@@ -3,6 +3,12 @@ using System;
 using Terraria;
 using Terraria.ModLoader;
 using TheConfectionRebirth.Tiles;
+using CookieBlock = TheConfectionRebirth.Tiles.CookieBlock;
+using CreamBlock = TheConfectionRebirth.Tiles.CreamBlock;
+using Creamsand = TheConfectionRebirth.Tiles.Creamsand;
+using Creamsandstone = TheConfectionRebirth.Tiles.Creamsandstone;
+using Creamstone = TheConfectionRebirth.Tiles.Creamstone;
+using HardenedCreamsand = TheConfectionRebirth.Tiles.HardenedCreamsand;
 
 namespace AlternativeCompat.Confection
 {
@@ -38,7 +44,7 @@ namespace AlternativeCompat.Confection
         private void ConfectionTiles(ReadOnlySpan<int> tileCounts)
         {
             snowpylonConfectionCount = tileCounts[ModContent.TileType<CreamBlock>()]
-                + tileCounts[ModContent.TileType<OrangeIce>()];
+                + tileCounts[ModContent.TileType<BlueIce>()];
 
             desertpylonConfectionCount = tileCounts[ModContent.TileType<Creamsand>()]
                 + tileCounts[ModContent.TileType<Creamsandstone>()]
@@ -48,7 +54,6 @@ namespace AlternativeCompat.Confection
                 + tileCounts[ModContent.TileType<Creamstone>()]
                 + tileCounts[ModContent.TileType<CreamGrass>()]
                 + tileCounts[ModContent.TileType<CreamBlock>()]
-                + tileCounts[ModContent.TileType<OrangeIce>()]
                 + tileCounts[ModContent.TileType<Creamsand>()]
                 + tileCounts[ModContent.TileType<HardenedCreamsand>()]
                 + tileCounts[ModContent.TileType<Creamsandstone>()];
@@ -61,9 +66,6 @@ namespace AlternativeCompat.Confection
             Main.SceneMetrics.BloodTileCount -= confectionBlockCount;
             if (Main.SceneMetrics.BloodTileCount < 0)
                 Main.SceneMetrics.BloodTileCount = 0;
-
-            Main.SceneMetrics.SnowTileCount += tileCounts[ModContent.TileType<CreamBlock>()]
-                + tileCounts[ModContent.TileType<OrangeIce>()];
 
             Main.SceneMetrics.SandTileCount += tileCounts[ModContent.TileType<Creamsand>()]
                 + tileCounts[ModContent.TileType<HardenedCreamsand>()]

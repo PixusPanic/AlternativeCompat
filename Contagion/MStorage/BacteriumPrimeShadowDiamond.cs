@@ -1,4 +1,5 @@
 ﻿using Avalon.NPCs.Bosses.PreHardmode;
+using Avalon.NPCs.Bosses.PreHardmode.BacteriumPrime;
 using Terraria.ModLoader;
 
 namespace AlternativeCompat.Depths.MStorage

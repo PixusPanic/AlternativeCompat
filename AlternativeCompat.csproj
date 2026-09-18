@@ -8,14 +8,17 @@
 		
 	</PropertyGroup>
 	<ItemGroup>
+	  <Reference Include="AltLibrary">
+	    <HintPath>..\ModAssemblies\AltLibrary_v2.2.0.8.dll</HintPath>
+	  </Reference>
 	  <Reference Include="Avalon">
-	    <HintPath>..\ModAssemblies\Avalon_v1.3.5.dll</HintPath>
+	    <HintPath>libs\Avalon_v1.3.7.1.dll</HintPath>
 	  </Reference>
 	  <Reference Include="BetterPotions">
-	    <HintPath>..\ModAssemblies\BetterPotions_v1.3.1.dll</HintPath>
+	    <HintPath>..\ModAssemblies\BetterPotions_v1.3.4.dll</HintPath>
 	  </Reference>
 	  <Reference Include="MagicStorage">
-	    <HintPath>..\ModAssemblies\MagicStorage_v0.7.0.4.dll</HintPath>
+	    <HintPath>libs\MagicStorage_v0.7.0.11.dll</HintPath>
 	  </Reference>
 	  <Reference Include="ModLiquidLib">
 	    <HintPath>..\ModAssemblies\ModLiquidLib_v2025.12.202601.dll</HintPath>
@@ -23,20 +26,26 @@
 	  <Reference Include="OrchidMod">
 	    <HintPath>..\ModAssemblies\OrchidMod_v1.5.1.3.dll</HintPath>
 	  </Reference>
+	  <Reference Include="PegasusLib">
+	    <HintPath>..\ModAssemblies\PegasusLib_v1.1.4.3.dll</HintPath>
+	  </Reference>
 	  <Reference Include="PrimeRework">
-	    <HintPath>..\ModAssemblies\PrimeRework_v5.0.13.dll</HintPath>
+	    <HintPath>libs\PrimeRework_v5.0.16.dll</HintPath>
 	  </Reference>
 	  <Reference Include="SerousCommonLib">
-	    <HintPath>..\ModAssemblies\SerousCommonLib_v1.0.6.dll</HintPath>
+	    <HintPath>libs\SerousCommonLib_v1.0.6.2.dll</HintPath>
 	  </Reference>
 	  <Reference Include="SpiritReforged">
-	    <HintPath>..\ModAssemblies\SpiritReforged_v0.2.2.5.dll</HintPath>
+	    <HintPath>libs\SpiritReforged_v0.2.2.8.dll</HintPath>
 	  </Reference>
 	  <Reference Include="TheConfectionRebirth">
-	    <HintPath>..\TheConfectionRebirth\bin\Debug\net8.0\TheConfectionRebirth.dll</HintPath>
+	    <HintPath>libs\TheConfectionRebirth_v0.30.2.dll</HintPath>
 	  </Reference>
 	  <Reference Include="TheDepths">
-	    <HintPath>..\ModAssemblies\TheDepths_v1.0.4.0.dll</HintPath>
+	    <HintPath>libs\TheDepths_v1.0.5.7.dll</HintPath>
+	  </Reference>
+	  <Reference Include="ThoriumMod">
+	    <HintPath>..\ModAssemblies\ThoriumMod_v1.7.2.8.dll</HintPath>
 	  </Reference>
 	</ItemGroup>
 	<ItemGroup>

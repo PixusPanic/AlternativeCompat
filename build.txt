@@ -1,6 +1,6 @@
 displayName = Unofficial Alternative Biomes Compatibility
 author = Pixus
-version = 1.1.5
+version = 1.1.7
 weakReferences = ModLiquidLib, TheDepths@1.0.5.7, TheConfectionRebirth, Avalon, MagicStorage, SpiritReforged, BetterPotions, OrchidMod
 sortAfter = ThoriumMod, Verdant, PrimeRework
 includeSource = true
